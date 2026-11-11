@@ -1,0 +1,151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Basics Simulation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🐧 Linux Basics</h1>
+
+    <p>Welcome to the Linux Command Challenge!</p>
+
+    <h3 id="question">What command shows your current location in the terminal?</h3>
+
+    <button onclick="checkAnswer('ls')">ls</button>
+    <button onclick="checkAnswer('pwd')">pwd</button>
+    <button onclick="checkAnswer('cd')">cd</button>
+
+    <p id="feedback"></p>
+
+    <button onclick="nextQuestion()">Next Question</button>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "What command shows your current location in the terminal?",
+            options: ["ls", "pwd", "cd"],
+            answer: "pwd",
+            explanation: "Correct! pwd shows your current directory."
+        },
+        {
+            question: "What command lists files and folders?",
+            options: ["mkdir", "ls", "whoami"],
+            answer: "ls",
+            explanation: "Correct! ls displays files and folders."
+        },
+        {
+            question: "What command creates a new folder?",
+            options: ["mkdir", "cat", "pwd"],
+            answer: "mkdir",
+            explanation: "Correct! mkdir creates a new directory."
+        },
+        {
+            question: "What command shows your username?",
+            options: ["clear", "cd", "whoami"],
+            answer: "whoami",
+            explanation: "Correct! whoami displays your current username."
+        }
+    ];
+
+    let currentQuestion = 0;
+
+    function loadQuestion() {
+        document.getElementById("question").textContent =
+            questions[currentQuestion].question;
+
+        const buttons = document.querySelectorAll(".container button");
+
+        questions[currentQuestion].options.forEach((option, index) => {
+            buttons[index].textContent = option;
+            buttons[index].onclick = () => checkAnswer(option);
+        });
+
+        document.getElementById("feedback").textContent = "";
+    }
+
+    function checkAnswer(choice) {
+        const feedback = document.getElementById("feedback");
+
+        if (choice === questions[currentQuestion].answer) {
+            feedback.textContent = questions[currentQuestion].explanation;
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent = "Not quite! Try again.";
+            feedback.style.color = "red";
+        }
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+
+        if (currentQuestion >= questions.length) {
+            document.getElementById("question").textContent =
+                "🎉 Congratulations! You completed the Linux challenge!";
+
+            document.getElementById("feedback").textContent =
+                "You have learned some basic Linux commands.";
+
+            document.querySelectorAll(".container button").forEach(button => {
+                button.style.display = "none";
+            });
+
+            return;
+        }
+
+        loadQuestion();
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
