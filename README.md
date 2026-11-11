@@ -1,16 +1,15 @@
-# 🛡️ Simulated Cybersecurity for Beginners
+
+# 🛡️ CYBERSIM | Interactive Cybersecurity Lab
 
 An interactive, beginner-friendly cybersecurity learning lab designed to teach essential cybersecurity concepts through safe simulations, practical exercises, and knowledge checks.
 
 ## 🌐 Live Website
 
-**[Visit the Cybersecurity Learning Lab](https://ireogueche.github.io/simulated-cybersecurity-for-beginners/)**
+**[Visit CYBERSIM](https://ireogueche.github.io/simulated-cybersecurity-for-beginners/)**
 
-## 📌 About the Project
+## 🖥️ Project Preview
 
-This project introduces beginners to important cybersecurity concepts through interactive scenarios that simulate everyday digital security situations.
-
-The goal is to make cybersecurity easier to understand while encouraging safe online habits and security awareness.
+![CYBERSIM Homepage](cybersim-homepage.png)
 
 ## 📚 Learning Modules
 
