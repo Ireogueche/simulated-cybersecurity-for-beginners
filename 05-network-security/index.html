@@ -4,152 +4,845 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Security Simulation</title>
+
+    <meta name="description" content="Learn network security fundamentals and practise safer public Wi-Fi decisions through an interactive cybersecurity simulation.">
+
+    <title>CYBERSIM | Module 05 – Network Security</title>
 
     <style>
+        :root {
+            --green: #193329;
+            --green-light: #294337;
+            --lime: #d2e878;
+            --paper: #f5f6f1;
+            --white: #ffffff;
+            --ink: #192720;
+            --muted: #69766e;
+            --line: #e1e6de;
+            --soft: #edf1e8;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            padding: 20px;
-            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 650px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-        }
-
-        h1 {
-            color: #2563eb;
-        }
-
-        .scenario {
-            background: #f8fafc;
-            border: 1px solid #cbd5e1;
-            padding: 18px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: left;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
         button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 6px;
-            background: #2563eb;
-            color: white;
+            font: inherit;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
-            background: #1d4ed8;
+        .wrapper {
+            width: min(1080px, calc(100% - 40px));
+            margin: auto;
         }
 
-        #feedback {
-            margin-top: 20px;
-            font-weight: bold;
+        /* HEADER */
+
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+            background: var(--white);
         }
 
-        .navigation {
+        .header-inner {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            margin-top: 30px;
+            align-items: center;
+            gap: 20px;
         }
 
-        .navigation a {
-            background: #16a34a;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            background: var(--green);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: var(--lime);
+        }
+
+        .brand-mark svg {
+            width: 27px;
+            height: 27px;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            line-height: 1.2;
+            font-weight: 900;
+            letter-spacing: 1.6px;
+        }
+
+        .brand-name span {
+            color: #819d40;
+        }
+
+        .brand-tagline {
+            display: block;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .header-link {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .header-link:hover {
+            color: #769438;
+        }
+
+        /* PAGE INTRODUCTION */
+
+        .page {
+            padding: 48px 0 65px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--green);
+        }
+
+        .module-label {
+            display: inline-block;
+            color: #607b32;
+            background: #edf2df;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 47px);
+            line-height: 1.13;
+            letter-spacing: -1.8px;
+            margin-bottom: 14px;
+        }
+
+        .page-description {
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        /* LEARNING OBJECTIVES */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-heading {
+            font-size: 19px;
+            letter-spacing: -0.5px;
+            margin-bottom: 17px;
+        }
+
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 13px;
+        }
+
+        .objective {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 17px;
+            font-size: 12px;
+            color: #536158;
+        }
+
+        .objective strong {
+            display: block;
+            color: var(--green);
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        /* SIMULATION */
+
+        .simulation {
+            margin-top: 39px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .simulation-header {
+            background: var(--green);
             color: white;
-            padding: 12px;
-            text-decoration: none;
-            border-radius: 6px;
-            flex: 1;
+            padding: 21px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
         }
 
-        .navigation a:first-child {
-            background: #2563eb;
+        .simulation-header h2 {
+            font-size: 15px;
+            letter-spacing: 0.2px;
+        }
+
+        .simulation-header span {
+            color: var(--lime);
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .simulation-body {
+            padding: 27px;
+        }
+
+        .scenario-label {
+            color: #718744;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin-bottom: 11px;
+        }
+
+        .scenario-title {
+            font-size: 21px;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .scenario-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 720px;
+        }
+
+        /* NETWORK SCENARIO */
+
+        .network-card {
+            background: #fafbf8;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            margin-top: 23px;
+            overflow: hidden;
+        }
+
+        .network-top {
+            background: #edf1e8;
+            padding: 13px 17px;
+            border-bottom: 1px solid var(--line);
+            font-size: 11px;
+            font-weight: 750;
+            color: var(--green);
+        }
+
+        .network-content {
+            padding: 20px;
+        }
+
+        .network-label {
+            color: #718744;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+
+        .wifi-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            margin-bottom: 10px;
+        }
+
+        .wifi-name {
+            font-size: 12px;
+            font-weight: 750;
+            color: var(--green);
+            overflow-wrap: anywhere;
+        }
+
+        .wifi-status {
+            font-size: 10px;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .wifi-status.warning {
+            color: #a34a40;
+            font-weight: 750;
+        }
+
+        .network-note {
+            margin-top: 16px;
+            background: #fcf0ee;
+            border: 1px solid #edcfca;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #8b4038;
+            line-height: 1.7;
+        }
+
+        /* QUESTIONS */
+
+        .question {
+            margin-top: 27px;
+            font-size: 15px;
+            font-weight: 750;
+        }
+
+        .options {
+            display: grid;
+            gap: 11px;
+            margin-top: 15px;
+        }
+
+        .option-button {
+            text-align: left;
+            width: 100%;
+            padding: 15px 17px;
+            background: #fafbf8;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 13px;
+            transition: border-color 0.2s,
+                background 0.2s, transform 0.2s;
+        }
+
+        .option-button:hover:not(:disabled) {
+            border-color: #92a95c;
+            background: #f3f6e9;
+            transform: translateY(-1px);
+        }
+
+        .option-button:disabled {
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        .option-button.correct {
+            border-color: #6e9e65;
+            background: #eef7e9;
+        }
+
+        .option-button.incorrect {
+            border-color: #d58b83;
+            background: #fcf0ee;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 19px;
+            padding: 17px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .feedback.success {
+            display: block;
+            background: #edf6e9;
+            border: 1px solid #c9dfbd;
+            color: #315c33;
+        }
+
+        .feedback.error {
+            display: block;
+            background: #fcf0ee;
+            border: 1px solid #edcfca;
+            color: #8b4038;
+        }
+
+        .simulation-actions {
+            display: flex;
+            gap: 11px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .secondary-button {
+            border: 1px solid var(--line);
+            background: white;
+            color: var(--green);
+            padding: 12px 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .secondary-button:hover {
+            background: var(--soft);
+        }
+
+        /* TAKEAWAY */
+
+        .takeaway {
+            margin-top: 23px;
+            padding: 20px;
+            background: var(--soft);
+            border-left: 3px solid #8ea949;
+            border-radius: 5px;
+        }
+
+        .takeaway h3 {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .takeaway p {
+            color: #5e6a61;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* MODULE NAVIGATION */
+
+        .module-navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 39px;
+        }
+
+        .nav-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 14px 10px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            transition: background 0.2s;
+        }
+
+        .nav-button:hover {
+            background: var(--soft);
+        }
+
+        .nav-button.home {
+            background: var(--green);
+            color: white;
+            border-color: var(--green);
+        }
+
+        .nav-button.home:hover {
+            background: var(--green-light);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 23px 0;
+            background: white;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer strong {
+            color: var(--green);
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 650px) {
+            .wrapper {
+                width: calc(100% - 30px);
+            }
+
+            .page {
+                padding-top: 33px;
+            }
+
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+
+            .simulation-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .simulation-body {
+                padding: 20px;
+            }
+
+            .module-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .header-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<header class="header">
+    <div class="wrapper header-inner">
 
-    <h1>🌐 Network Security</h1>
+        <a href="../index.html" class="brand"
+           aria-label="CYBERSIM home">
 
-    <p>Learn how to protect yourself when connecting to networks.</p>
+            <div class="brand-mark">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     aria-hidden="true">
+                    <path d="M12 3 20 6v5c0 5-3.3 8.2-8 10-4.7-1.8-8-5-8-10V6l8-3Z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+            </div>
 
-    <div class="scenario">
-        <h3>📶 Public Wi-Fi Scenario</h3>
+            <div>
+                <div class="brand-name">
+                    CYBER<span>SIM</span>
+                </div>
+                <span class="brand-tagline">
+                    INTERACTIVE CYBERSECURITY LAB
+                </span>
+            </div>
 
-        <p>
-            You are at a café and see two Wi-Fi networks.
-            One is confirmed by café staff as the official network.
-            The other has an unfamiliar name.
-        </p>
+        </a>
 
-        <p><strong>Which network should you choose?</strong></p>
+        <a class="header-link" href="../index.html">
+            ← All modules
+        </a>
+
+    </div>
+</header>
+
+
+<main class="wrapper page">
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>Module 05</span>
     </div>
 
-    <button onclick="checkAnswer(0)">
-        Connect to the unfamiliar network
-    </button>
+    <span class="module-label">
+        MODULE 05 / 08 · NETWORKS
+    </span>
 
-    <button onclick="checkAnswer(1)">
-        Confirm the official network with café staff before connecting
-    </button>
+    <h1 class="page-title">
+        Network Security
+    </h1>
 
-    <button onclick="checkAnswer(2)">
-        Connect to both networks
-    </button>
+    <p class="page-description">
+        Understand basic network security, learn about public
+        Wi-Fi risks and practise making safer decisions when
+        connecting to unfamiliar networks.
+    </p>
 
-    <p id="feedback"></p>
 
-    <button onclick="resetSimulation()">Try Again</button>
+    <section class="section">
+        <h2 class="section-heading">
+            What you will learn
+        </h2>
 
-    <div class="navigation">
-        <a href="../04-social-engineering/">
+        <div class="objectives">
+
+            <div class="objective">
+                <strong>01 · Understand</strong>
+                Learn what network security means and why it matters.
+            </div>
+
+            <div class="objective">
+                <strong>02 · Recognise</strong>
+                Understand the risks of unfamiliar public Wi-Fi networks.
+            </div>
+
+            <div class="objective">
+                <strong>03 · Protect</strong>
+                Practise safer network connection habits.
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="simulation">
+
+        <div class="simulation-header">
+            <h2>Interactive Network Security Simulation</h2>
+            <span>SCENARIO 01 · BEGINNER</span>
+        </div>
+
+        <div class="simulation-body">
+
+            <div class="scenario-label">
+                REAL-WORLD SITUATION
+            </div>
+
+            <h2 class="scenario-title">
+                Connecting to public Wi-Fi
+            </h2>
+
+            <p class="scenario-description">
+                You are visiting a café and want to connect to
+                the internet using its public Wi-Fi.
+
+                You notice several networks with similar names.
+                One appears to be the café's network, while another
+                has an unfamiliar name.
+
+                Before connecting, you need to decide how to
+                verify the correct network.
+            </p>
+
+            <div class="network-card">
+
+                <div class="network-top">
+                    AVAILABLE WI-FI NETWORKS · SAMPLE SCENARIO
+                </div>
+
+                <div class="network-content">
+
+                    <div class="network-label">
+                        NETWORKS DETECTED
+                    </div>
+
+                    <div class="wifi-option">
+                        <span class="wifi-name">Cafe_Guest_WiFi</span>
+                        <span class="wifi-status">Unverified</span>
+                    </div>
+
+                    <div class="wifi-option">
+                        <span class="wifi-name">Cafe_Free_Internet</span>
+                        <span class="wifi-status warning">Unfamiliar</span>
+                    </div>
+
+                    <div class="wifi-option">
+                        <span class="wifi-name">Cafe_Guest_WiFi_5G</span>
+                        <span class="wifi-status">Unverified</span>
+                    </div>
+
+                    <div class="network-note">
+                        <strong>Security reminder:</strong>
+                        A familiar-looking network name does not prove
+                        that a Wi-Fi network is legitimate. Similar
+                        names can be used to mislead users.
+                    </div>
+
+                </div>
+
+            </div>
+
+            <p class="question">
+                What should you do before connecting?
+            </p>
+
+            <div class="options" id="options">
+
+                <button class="option-button"
+                    onclick="checkAnswer(0)">
+                    A. Connect to the network with the strongest signal.
+                </button>
+
+                <button class="option-button"
+                    onclick="checkAnswer(1)">
+                    B. Confirm the correct network name with café staff
+                    before connecting.
+                </button>
+
+                <button class="option-button"
+                    onclick="checkAnswer(2)">
+                    C. Connect to every available network to find
+                    the fastest one.
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback"
+                 role="status" aria-live="polite">
+            </div>
+
+            <div class="simulation-actions">
+                <button class="secondary-button"
+                    onclick="resetSimulation()">
+                    ↻ Try Again
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+        <h3>Key takeaway</h3>
+        <p>
+            Public Wi-Fi can expose users to security and privacy
+            risks, especially when networks are unfamiliar or
+            impersonate legitimate hotspots. Confirm the correct
+            network with staff, avoid sensitive transactions on
+            untrusted networks, and use secure connections.
+            A VPN can add protection, but it does not make every
+            network or online activity automatically safe.
+        </p>
+    </section>
+
+
+    <nav class="module-navigation"
+         aria-label="Module navigation">
+
+        <a class="nav-button"
+           href="../04-social-engineering/">
             ← Previous Module
         </a>
 
-        <a href="../index.html">
+        <a class="nav-button home"
+           href="../index.html">
             🏠 Home
         </a>
 
-        <a href="../06-malware/">
+        <a class="nav-button"
+           href="../06-malware/">
             Next Module →
         </a>
-    </div>
 
-</div>
+    </nav>
+
+</main>
+
+
+<footer class="footer">
+    <div class="wrapper footer-inner">
+        <strong>CYBERSIM</strong>
+        <p>Interactive Cybersecurity Lab · Module 05 of 08</p>
+    </div>
+</footer>
+
 
 <script>
-    function checkAnswer(choice) {
-        const feedback = document.getElementById("feedback");
+    const feedback = document.getElementById("feedback");
+    const optionButtons = document.querySelectorAll(".option-button");
 
-        if (choice === 1) {
+    const correctAnswer = 1;
+
+    function checkAnswer(selectedOption) {
+
+        if (optionButtons[0].disabled) {
+            return;
+        }
+
+        optionButtons.forEach(button => {
+            button.disabled = true;
+        });
+
+        if (selectedOption === correctAnswer) {
+
+            optionButtons[selectedOption].classList.add("correct");
+
             feedback.textContent =
-                "Correct! Confirming the network name with staff helps you avoid fake Wi-Fi networks. Avoid sensitive activities on unsecured public Wi-Fi.";
+                "Correct! Confirming the network name directly " +
+                "with café staff helps you avoid connecting to " +
+                "an impersonated or misleading hotspot. Always " +
+                "be careful when using unfamiliar public networks.";
 
-            feedback.style.color = "green";
+            feedback.className = "feedback success";
+
         } else {
-            feedback.textContent =
-                "Not quite! An unfamiliar Wi-Fi network could be unsafe. Always verify the network before connecting.";
 
-            feedback.style.color = "red";
+            optionButtons[selectedOption].classList.add("incorrect");
+            optionButtons[correctAnswer].classList.add("correct");
+
+            feedback.textContent =
+                "Not quite. A strong signal or familiar-looking " +
+                "name does not prove a network is legitimate. " +
+                "Ask café staff to confirm the official network " +
+                "name before connecting.";
+
+            feedback.className = "feedback error";
         }
     }
 
     function resetSimulation() {
-        document.getElementById("feedback").textContent = "";
+
+        optionButtons.forEach(button => {
+            button.disabled = false;
+            button.classList.remove("correct", "incorrect");
+        });
+
+        feedback.textContent = "";
+        feedback.className = "feedback";
     }
 </script>
 
