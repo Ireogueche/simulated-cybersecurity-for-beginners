@@ -1,0 +1,97 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Awareness Simulation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #174ea6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #feedback {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <h1>🎣 Phishing Awareness</h1>
+
+    <p>Can you spot a phishing message?</p>
+
+    <h3>Scenario 1: Read this email</h3>
+
+    <p><strong>From:</strong> security@bank-example.com</p>
+
+    <p><strong>Subject:</strong> URGENT! Your account will be blocked!</p>
+
+    <p>
+        Dear Customer, your account will be closed today.
+        Click the link below immediately to confirm your password.
+    </p>
+
+    <h3>What should you do?</h3>
+
+    <button onclick="checkAnswer(false)">
+        Click the link immediately
+    </button>
+
+    <button onclick="checkAnswer(true)">
+        Avoid the link and contact the bank through its official website
+    </button>
+
+    <button onclick="checkAnswer(false)">
+        Reply with my password
+    </button>
+
+    <p id="feedback"></p>
+
+</div>
+
+<script>
+    function checkAnswer(correct) {
+        const feedback = document.getElementById("feedback");
+
+        if (correct) {
+            feedback.textContent =
+                "Correct! Urgent threats and requests for passwords are warning signs.";
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent =
+                "Not quite! Never share your password or trust unexpected links.";
+            feedback.style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>
