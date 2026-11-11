@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Safety Simulation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🛡️ Online Safety Challenge</h1>
+
+    <p>Test your knowledge of staying safe online!</p>
+
+    <h3 id="question">You receive a message asking for your bank password. What should you do?</h3>
+
+    <button onclick="checkAnswer(0)">Share the password</button>
+    <button onclick="checkAnswer(1)">Ignore the message and report it</button>
+    <button onclick="checkAnswer(2)">Reply with your personal details</button>
+
+    <p id="feedback"></p>
+
+    <button onclick="nextQuestion()">Next Question</button>
+</div>
+
+<script>
+    const questions = [
+        {
+            question: "You receive a message asking for your bank password. What should you do?",
+            options: [
+                "Share the password",
+                "Ignore the message and report it",
+                "Reply with your personal details"
+            ],
+            answer: 1,
+            explanation: "Correct! Never share your bank password. Report suspicious messages."
+        },
+        {
+            question: "You are using public Wi-Fi. Which action is safest?",
+            options: [
+                "Access your bank account on an unknown network",
+                "Share your passwords with others",
+                "Avoid sensitive activities on unsecured Wi-Fi"
+            ],
+            answer: 2,
+            explanation: "Correct! Avoid accessing sensitive accounts on unsecured public Wi-Fi."
+        },
+        {
+            question: "A website asks for your personal information unexpectedly. What should you do?",
+            options: [
+                "Check that the website is trustworthy before sharing anything",
+                "Enter all your details",
+                "Use someone else's password"
+            ],
+            answer: 0,
+            explanation: "Correct! Check that a website is legitimate before sharing personal information."
+        },
+        {
+            question: "What is a good way to protect your online accounts?",
+            options: [
+                "Use the same password everywhere",
+                "Use strong, unique passwords and enable two-factor authentication",
+                "Share passwords with friends"
+            ],
+            answer: 1,
+            explanation: "Correct! Strong, unique passwords and two-factor authentication improve account security."
+        }
+    ];
+
+    let currentQuestion = 0;
+
+    function loadQuestion() {
+        document.getElementById("question").textContent =
+            questions[currentQuestion].question;
+
+        const buttons = document.querySelectorAll(".container button");
+
+        questions[currentQuestion].options.forEach((option, index) => {
+            buttons[index].textContent = option;
+            buttons[index].onclick = () => checkAnswer(index);
+        });
+
+        document.getElementById("feedback").textContent = "";
+    }
+
+    function checkAnswer(choice) {
+        const feedback = document.getElementById("feedback");
+
+        if (choice === questions[currentQuestion].answer) {
+            feedback.textContent = questions[currentQuestion].explanation;
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent = "Not quite! Try again.";
+            feedback.style.color = "red";
+        }
+    }
+
+    function nextQuestion() {
+        currentQuestion++;
+
+        if (currentQuestion >= questions.length) {
+            document.getElementById("question").textContent =
+                "🎉 Congratulations! You completed the Online Safety Challenge!";
+
+            document.getElementById("feedback").textContent =
+                "Keep practising safe online habits!";
+
+            document.querySelectorAll(".container button").forEach(button => {
+                button.style.display = "none";
+            });
+
+            return;
+        }
+
+        loadQuestion();
+    }
+
+    loadQuestion();
+</script>
+
+</body>
+</html>
