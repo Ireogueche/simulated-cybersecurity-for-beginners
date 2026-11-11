@@ -10,16 +10,20 @@
         body {
             font-family: Arial, sans-serif;
             background: #f1f5f9;
-            padding: 30px;
+            padding: 20px;
             text-align: center;
         }
 
         .container {
-            background: white;
-            max-width: 550px;
+            max-width: 650px;
             margin: auto;
+            background: white;
             padding: 25px;
             border-radius: 12px;
+        }
+
+        h1 {
+            color: #2563eb;
         }
 
         button {
@@ -29,18 +33,39 @@
             margin: 10px 0;
             border: none;
             border-radius: 6px;
-            background: #174ea6;
+            background: #2563eb;
             color: white;
             cursor: pointer;
+            font-size: 16px;
         }
 
         button:hover {
-            background: #103675;
+            background: #1d4ed8;
         }
 
         #feedback {
-            font-weight: bold;
             margin-top: 20px;
+            font-weight: bold;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            background: #16a34a;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 6px;
+            flex: 1;
+        }
+
+        .navigation a:first-child {
+            background: #2563eb;
         }
     </style>
 </head>
@@ -48,60 +73,65 @@
 <body>
 
 <div class="container">
+
     <h1>🛡️ Cybersecurity Basics</h1>
 
-    <p>Welcome to your first cybersecurity simulation!</p>
+    <p>Welcome to your first cybersecurity challenge!</p>
 
-    <h3>Scenario 1</h3>
+    <h3>
+        You find a computer in a public place that someone has left unlocked.
+        What should you do?
+    </h3>
 
-    <p>
-        You leave your computer unlocked when you walk away.
-        Someone could access your private files.
-    </p>
-
-    <h3>What should you do?</h3>
-
-    <button onclick="checkAnswer(false)">
-        Leave the computer open
+    <button onclick="checkAnswer(0)">
+        Use the computer without permission
     </button>
 
-    <button onclick="checkAnswer(true)">
-        Lock the computer before leaving
+    <button onclick="checkAnswer(1)">
+        Lock the computer and inform the owner or staff
     </button>
 
-    <button onclick="checkAnswer(false)">
-        Share your password
+    <button onclick="checkAnswer(2)">
+        Look through the person's files
     </button>
 
     <p id="feedback"></p>
+
+    <button onclick="resetSimulation()">Try Again</button>
+
+    <div class="navigation">
+        <a href="../index.html">
+            🏠 Home
+        </a>
+
+        <a href="../02-phishing/">
+            Next Module →
+        </a>
+    </div>
+
 </div>
 
 <script>
-    function checkAnswer(correct) {
+    function checkAnswer(choice) {
         const feedback = document.getElementById("feedback");
 
-        if (correct) {
+        if (choice === 1) {
             feedback.textContent =
-                "Correct! Locking your computer helps protect your information.";
+                "Correct! Protecting other people's devices and information is an important part of cybersecurity.";
+
             feedback.style.color = "green";
         } else {
             feedback.textContent =
-                "Not quite! Try again. Think about how to protect your files.";
+                "Not quite! You should never access another person's computer or files without permission.";
+
             feedback.style.color = "red";
         }
     }
+
+    function resetSimulation() {
+        document.getElementById("feedback").textContent = "";
+    }
 </script>
-
-<div style="display:flex; justify-content:space-between; gap:10px; margin:25px 0;">
-    <a href="../index.html" style="background:#2563eb; color:white; padding:12px 18px; text-decoration:none; border-radius:6px;">
-        🏠 Home
-    </a>
-
-    <a href="../02-phishing/" style="background:#16a34a; color:white; padding:12px 18px; text-decoration:none; border-radius:6px;">
-        Next Module →
-    </a>
-</div>
 
 </body>
 </html>
-
