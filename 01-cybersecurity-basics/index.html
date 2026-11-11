@@ -2,532 +2,605 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="Learn cybersecurity fundamentals through a practical, beginner-friendly security simulation.">
-
-    <title>CYBERSIM | Module 01 – Cybersecurity Basics</title>
-
-    <style>
-        :root {
-            --green: #193329;
-            --green-light: #294337;
-            --lime: #d2e878;
-            --paper: #f5f6f1;
-            --white: #ffffff;
-            --ink: #192720;
-            --muted: #69766e;
-            --line: #e1e6de;
-            --soft: #edf1e8;
-            --radius: 12px;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont,
-                "Segoe UI", sans-serif;
-            background: var(--paper);
-            color: var(--ink);
-            line-height: 1.6;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button {
-            font: inherit;
-            cursor: pointer;
-        }
-
-        .wrapper {
-            width: min(1080px, calc(100% - 40px));
-            margin: auto;
-        }
-
-        /* HEADER */
-
-        .header {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--line);
-            background: var(--white);
-        }
-
-        .header-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 11px;
-        }
-
-        .brand-mark {
-            width: 42px;
-            height: 42px;
-            flex-shrink: 0;
-            background: var(--green);
-            border-radius: 10px;
-            display: grid;
-            place-items: center;
-            color: var(--lime);
-        }
-
-        .brand-mark svg {
-            width: 27px;
-            height: 27px;
-        }
-
-        .brand-name {
-            font-size: 16px;
-            line-height: 1.2;
-            font-weight: 900;
-            letter-spacing: 1.6px;
-        }
-
-        .brand-name span {
-            color: #819d40;
-        }
-
-        .brand-tagline {
-            display: block;
-            color: var(--muted);
-            font-size: 9px;
-            letter-spacing: 1.2px;
-            font-weight: 700;
-            margin-top: 4px;
-        }
-
-        .header-link {
-            color: var(--green);
-            font-size: 12px;
-            font-weight: 750;
-        }
-
-        .header-link:hover {
-            color: #769438;
-        }
-
-        /* PAGE INTRODUCTION */
-
-        .page {
-            padding: 48px 0 65px;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            color: var(--muted);
-            font-size: 11px;
-            margin-bottom: 30px;
-        }
-
-        .breadcrumb a:hover {
-            color: var(--green);
-        }
-
-        .module-label {
-            display: inline-block;
-            color: #607b32;
-            background: #edf2df;
-            border-radius: 4px;
-            padding: 6px 10px;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 1.3px;
-            margin-bottom: 15px;
-        }
-
-        .page-title {
-            font-size: clamp(32px, 5vw, 47px);
-            line-height: 1.13;
-            letter-spacing: -1.8px;
-            margin-bottom: 14px;
-        }
-
-        .page-description {
-            color: var(--muted);
-            font-size: 14px;
-            max-width: 650px;
-            line-height: 1.8;
-        }
-
-        /* LEARNING INFORMATION */
-
-        .section {
-            margin-top: 35px;
-        }
-
-        .section-heading {
-            font-size: 19px;
-            letter-spacing: -0.5px;
-            margin-bottom: 17px;
-        }
-
-        .objectives {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 13px;
-        }
-
-        .objective {
-            background: var(--white);
-            border: 1px solid var(--line);
-            border-radius: 9px;
-            padding: 17px;
-            font-size: 12px;
-            color: #536158;
-        }
-
-        .objective strong {
-            display: block;
-            color: var(--green);
-            font-size: 12px;
-            margin-bottom: 5px;
-        }
-
-        /* SIMULATION */
-
-        .simulation {
-            margin-top: 39px;
-            background: var(--white);
-            border: 1px solid var(--line);
-            border-radius: 13px;
-            overflow: hidden;
-        }
-
-        .simulation-header {
-            background: var(--green);
-            color: white;
-            padding: 21px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .simulation-header h2 {
-            font-size: 15px;
-            letter-spacing: 0.2px;
-        }
-
-        .simulation-header span {
-            color: var(--lime);
-            font-size: 10px;
-            letter-spacing: 1px;
-            font-weight: 800;
-        }
-
-        .simulation-body {
-            padding: 27px;
-        }
-
-        .scenario-label {
-            color: #718744;
-            font-size: 10px;
-            letter-spacing: 1.5px;
-            font-weight: 800;
-            margin-bottom: 11px;
-        }
-
-        .scenario-title {
-            font-size: 21px;
-            line-height: 1.35;
-            margin-bottom: 12px;
-        }
-
-        .scenario-description {
-            color: var(--muted);
-            font-size: 13px;
-            line-height: 1.8;
-            max-width: 720px;
-        }
-
-        .question {
-            margin-top: 27px;
-            font-size: 15px;
-            font-weight: 750;
-        }
-
-        .options {
-            display: grid;
-            gap: 11px;
-            margin-top: 15px;
-        }
-
-        .option-button {
-            text-align: left;
-            width: 100%;
-            padding: 15px 17px;
-            background: #fafbf8;
-            color: var(--ink);
-            border: 1px solid var(--line);
-            border-radius: 8px;
-            font-size: 13px;
-            transition: border-color 0.2s,
-                background 0.2s, transform 0.2s;
-        }
-
-        .option-button:hover:not(:disabled) {
-            border-color: #92a95c;
-            background: #f3f6e9;
-            transform: translateY(-1px);
-        }
-
-        .option-button:disabled {
-            cursor: default;
-            opacity: 0.85;
-        }
-
-        .option-button.correct {
-            border-color: #6e9e65;
-            background: #eef7e9;
-        }
-
-        .option-button.incorrect {
-            border-color: #d58b83;
-            background: #fcf0ee;
-        }
-
-        .feedback {
-            display: none;
-            margin-top: 19px;
-            padding: 17px;
-            border-radius: 8px;
-            font-size: 13px;
-            line-height: 1.7;
-        }
-
-        .feedback.success {
-            display: block;
-            background: #edf6e9;
-            border: 1px solid #c9dfbd;
-            color: #315c33;
-        }
-
-        .feedback.error {
-            display: block;
-            background: #fcf0ee;
-            border: 1px solid #edcfca;
-            color: #8b4038;
-        }
-
-        .simulation-actions {
-            display: flex;
-            gap: 11px;
-            flex-wrap: wrap;
-            margin-top: 20px;
-        }
-
-        .primary-button {
-            border: none;
-            background: var(--green);
-            color: white;
-            padding: 12px 19px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 750;
-        }
-
-        .primary-button:hover {
-            background: var(--green-light);
-        }
-
-        .secondary-button {
-            border: 1px solid var(--line);
-            background: white;
-            color: var(--green);
-            padding: 12px 19px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 750;
-        }
-
-        .secondary-button:hover {
-            background: var(--soft);
-        }
-
-        /* TAKEAWAY */
-
-        .takeaway {
-            margin-top: 23px;
-            padding: 20px;
-            background: var(--soft);
-            border-left: 3px solid #8ea949;
-            border-radius: 5px;
-        }
-
-        .takeaway h3 {
-            font-size: 13px;
-            margin-bottom: 6px;
-        }
-
-        .takeaway p {
-            color: #5e6a61;
-            font-size: 12px;
-            line-height: 1.8;
-        }
-
-        /* MODULE NAVIGATION */
-
-        .module-navigation {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 12px;
-            margin-top: 39px;
-        }
-
-        .nav-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 7px;
-            background: white;
-            border: 1px solid var(--line);
-            border-radius: 7px;
-            padding: 14px 10px;
-            color: var(--green);
-            font-size: 12px;
-            font-weight: 750;
-            transition: background 0.2s;
-        }
-
-        .nav-button:hover {
-            background: var(--soft);
-        }
-
-        .nav-button.home {
-            background: var(--green);
-            color: white;
-            border-color: var(--green);
-        }
-
-        .nav-button.home:hover {
-            background: var(--green-light);
-        }
-
-        /* FOOTER */
-
-        .footer {
-            border-top: 1px solid var(--line);
-            padding: 23px 0;
-            background: white;
-        }
-
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            color: var(--muted);
-            font-size: 11px;
-        }
-
-        .footer strong {
-            color: var(--green);
-            letter-spacing: 1px;
-        }
-
-        /* RESPONSIVE DESIGN */
-
-        @media (max-width: 650px) {
-            .wrapper {
-                width: calc(100% - 30px);
-            }
-
-            .page {
-                padding-top: 33px;
-            }
-
-            .objectives {
-                grid-template-columns: 1fr;
-            }
-
-            .simulation-header {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .simulation-body {
-                padding: 20px;
-            }
-
-            .module-navigation {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .brand-name {
-                font-size: 14px;
-            }
-
-            .header-link {
-                font-size: 11px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Study cybersecurity fundamentals, the CIA triad, threat analysis and risk management through practical learning exercises.">
+<title>CYBERSIM | Module 01 – Cybersecurity Fundamentals</title>
+
+<style>
+:root {
+    --green:#193329;
+    --green-light:#294337;
+    --lime:#d2e878;
+    --paper:#f5f6f1;
+    --white:#ffffff;
+    --ink:#192720;
+    --muted:#69766e;
+    --line:#e1e6de;
+    --soft:#edf1e8;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.7;
+}
+
+a { color:inherit; text-decoration:none; }
+button { font:inherit; cursor:pointer; }
+
+.wrapper {
+    width:min(1080px,calc(100% - 40px));
+    margin:auto;
+}
+
+.header {
+    padding:20px 0;
+    background:white;
+    border-bottom:1px solid var(--line);
+}
+
+.header-inner {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.brand {
+    display:flex;
+    align-items:center;
+    gap:11px;
+}
+
+.brand-mark {
+    width:42px;
+    height:42px;
+    flex-shrink:0;
+    background:var(--green);
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    color:var(--lime);
+}
+
+.brand-mark svg { width:27px; height:27px; }
+
+.brand-name {
+    font-size:16px;
+    font-weight:900;
+    letter-spacing:1.6px;
+    line-height:1.2;
+}
+
+.brand-name span { color:#819d40; }
+
+.brand-tagline {
+    display:block;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1.2px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+.header-link {
+    color:var(--green);
+    font-size:12px;
+    font-weight:750;
+}
+
+.page { padding:45px 0 65px; }
+
+.breadcrumb {
+    display:flex;
+    gap:9px;
+    font-size:11px;
+    color:var(--muted);
+    margin-bottom:28px;
+}
+
+.module-label {
+    display:inline-block;
+    background:#edf2df;
+    color:#607b32;
+    padding:6px 10px;
+    border-radius:4px;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.3px;
+    margin-bottom:15px;
+}
+
+.page-title {
+    font-size:clamp(32px,5vw,47px);
+    line-height:1.15;
+    letter-spacing:-1.8px;
+    margin-bottom:12px;
+}
+
+.page-description {
+    max-width:720px;
+    color:var(--muted);
+    font-size:14px;
+}
+
+.section { margin-top:39px; }
+
+.section-heading {
+    font-size:21px;
+    letter-spacing:-.5px;
+    margin-bottom:13px;
+}
+
+.section-intro {
+    font-size:13px;
+    color:var(--muted);
+    max-width:760px;
+    margin-bottom:19px;
+}
+
+.objectives {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+.objective {
+    padding:17px;
+    background:white;
+    border:1px solid var(--line);
+    border-radius:9px;
+    font-size:12px;
+    color:var(--muted);
+}
+
+.objective strong {
+    display:block;
+    font-size:12px;
+    color:var(--green);
+    margin-bottom:5px;
+}
+
+/* LESSON CARDS */
+
+.lesson-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+.lesson-card {
+    background:white;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:19px;
+}
+
+.lesson-card h3 {
+    color:var(--green);
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.lesson-card p {
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* EXPLANATION BLOCK */
+
+.explain {
+    background:white;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:23px;
+    margin-top:17px;
+}
+
+.explain h3 {
+    font-size:16px;
+    color:var(--green);
+    margin-bottom:9px;
+}
+
+.explain p {
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:12px;
+}
+
+.term {
+    background:var(--soft);
+    padding:15px;
+    border-radius:7px;
+    margin-top:10px;
+}
+
+.term strong {
+    display:block;
+    color:var(--green);
+    font-size:12px;
+    margin-bottom:3px;
+}
+
+.term p {
+    font-size:12px;
+    margin:0;
+}
+
+.cia-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+}
+
+.cia-card {
+    background:white;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px;
+    border-top:3px solid #91aa54;
+}
+
+.cia-card h3 {
+    color:var(--green);
+    font-size:16px;
+    margin-bottom:8px;
+}
+
+.cia-card p {
+    color:var(--muted);
+    font-size:12px;
+}
+
+/* PRACTICAL LAB */
+
+.lab {
+    margin-top:42px;
+    background:white;
+    border:1px solid var(--line);
+    border-radius:13px;
+    overflow:hidden;
+}
+
+.lab-header {
+    background:var(--green);
+    color:white;
+    padding:21px 25px;
+}
+
+.lab-header h2 { font-size:16px; }
+.lab-header p { color:#c4d0c8; font-size:11px; margin-top:5px; }
+
+.lab-body { padding:26px; }
+
+.lab-label {
+    color:#718744;
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:1.5px;
+    margin-bottom:10px;
+}
+
+.scenario-box {
+    background:#fafbf8;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:19px;
+    margin:17px 0;
+}
+
+.scenario-box h3 {
+    font-size:16px;
+    color:var(--green);
+    margin-bottom:9px;
+}
+
+.scenario-box p {
+    color:var(--muted);
+    font-size:12px;
+}
+
+.evidence-list {
+    list-style:none;
+    margin-top:14px;
+}
+
+.evidence-list li {
+    padding:10px 12px;
+    border:1px solid var(--line);
+    background:white;
+    border-radius:6px;
+    margin-top:8px;
+    font-size:12px;
+}
+
+.evidence-list strong { color:var(--green); }
+
+.lab-question {
+    font-size:14px;
+    font-weight:800;
+    margin-top:23px;
+}
+
+.options {
+    display:grid;
+    gap:10px;
+    margin-top:14px;
+}
+
+.option {
+    width:100%;
+    text-align:left;
+    border:1px solid var(--line);
+    background:#fafbf8;
+    padding:14px 16px;
+    border-radius:8px;
+    font-size:12px;
+    color:var(--ink);
+    transition:.2s;
+}
+
+.option:hover:not(:disabled) {
+    background:#f1f5e7;
+    border-color:#92a95c;
+}
+
+.option:disabled { cursor:default; opacity:.9; }
+
+.option.correct {
+    background:#eef7e9;
+    border-color:#6e9e65;
+}
+
+.option.incorrect {
+    background:#fcf0ee;
+    border-color:#d58b83;
+}
+
+.feedback {
+    display:none;
+    margin-top:17px;
+    padding:15px;
+    border-radius:8px;
+    font-size:12px;
+}
+
+.feedback.success {
+    display:block;
+    background:#edf6e9;
+    color:#315c33;
+    border:1px solid #c9dfbd;
+}
+
+.feedback.error {
+    display:block;
+    background:#fcf0ee;
+    color:#8b4038;
+    border:1px solid #edcfca;
+}
+
+.lab-actions {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:18px;
+}
+
+.primary-button {
+    background:var(--green);
+    color:white;
+    border:none;
+    padding:12px 19px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:750;
+}
+
+.primary-button:hover:not(:disabled) { background:var(--green-light); }
+
+.primary-button:disabled { opacity:.5; cursor:not-allowed; }
+
+.secondary-button {
+    background:white;
+    color:var(--green);
+    border:1px solid var(--line);
+    padding:12px 19px;
+    border-radius:6px;
+    font-size:12px;
+    font-weight:750;
+}
+
+/* TAKEAWAY */
+
+.takeaway {
+    margin-top:24px;
+    padding:20px;
+    background:var(--soft);
+    border-left:3px solid #8ea949;
+    border-radius:5px;
+}
+
+.takeaway h3 { font-size:13px; margin-bottom:5px; }
+.takeaway p { font-size:12px; color:#5e6a61; }
+
+/* ASSESSMENT */
+
+.assessment {
+    margin-top:42px;
+    background:white;
+    border:1px solid var(--line);
+    border-radius:13px;
+    overflow:hidden;
+}
+
+.assessment-header {
+    background:var(--green);
+    color:white;
+    padding:21px 25px;
+}
+
+.assessment-header h2 { font-size:16px; }
+.assessment-header p { color:#c4d0c8; font-size:11px; margin-top:5px; }
+
+.assessment-body { padding:25px; }
+
+.progress-info {
+    display:flex;
+    justify-content:space-between;
+    font-size:11px;
+    font-weight:750;
+    margin-bottom:10px;
+}
+
+.progress-track {
+    height:7px;
+    background:#e7ebe3;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-fill {
+    height:100%;
+    width:0%;
+    background:#829b46;
+    transition:width .25s;
+}
+
+.assessment-question {
+    margin-top:25px;
+    font-size:15px;
+    font-weight:800;
+}
+
+.assessment-feedback {
+    display:none;
+    margin-top:17px;
+    padding:15px;
+    border-radius:8px;
+    font-size:12px;
+}
+
+.assessment-feedback.visible {
+    display:block;
+    background:#edf6e9;
+    border:1px solid #c9dfbd;
+    color:#315c33;
+}
+
+.results {
+    display:none;
+    text-align:center;
+    background:var(--soft);
+    margin-top:20px;
+    padding:22px;
+    border-radius:9px;
+}
+
+.results.visible { display:block; }
+
+.results h3 { color:var(--green); font-size:19px; }
+
+.results-score {
+    display:block;
+    color:#718b39;
+    font-size:34px;
+    font-weight:900;
+    margin:12px 0;
+}
+
+.results p { color:var(--muted); font-size:12px; }
+
+.module-navigation {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:40px;
+}
+
+.nav-button {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:14px 10px;
+    border-radius:7px;
+    background:white;
+    border:1px solid var(--line);
+    color:var(--green);
+    font-size:12px;
+    font-weight:750;
+}
+
+.nav-button.home {
+    background:var(--green);
+    color:white;
+    border-color:var(--green);
+}
+
+.footer {
+    background:white;
+    border-top:1px solid var(--line);
+    padding:23px 0;
+}
+
+.footer-inner {
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    color:var(--muted);
+    font-size:11px;
+}
+
+.footer strong { color:var(--green); letter-spacing:1px; }
+
+@media(max-width:750px) {
+    .objectives,.cia-grid,.lesson-grid {
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:650px) {
+    .wrapper { width:calc(100% - 30px); }
+    .page { padding-top:33px; }
+    .lab-body,.assessment-body { padding:20px; }
+    .header-link { font-size:11px; }
+    .brand-name { font-size:14px; }
+    .module-navigation { grid-template-columns:1fr; }
+    .footer-inner { flex-direction:column; }
+}
+
+@media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after { transition-duration:.01ms !important; }
+}
+</style>
 </head>
 
 <body>
 
 <header class="header">
     <div class="wrapper header-inner">
-
-        <a href="../index.html" class="brand"
-           aria-label="CYBERSIM home">
-
+        <a href="../index.html" class="brand" aria-label="CYBERSIM home">
             <div class="brand-mark">
                 <svg viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor"
-                     stroke-width="1.8"
-                     stroke-linecap="round"
-                     stroke-linejoin="round"
-                     aria-hidden="true">
+                    stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    aria-hidden="true">
                     <path d="M12 3 20 6v5c0 5-3.3 8.2-8 10-4.7-1.8-8-5-8-10V6l8-3Z"/>
                     <path d="m9 12 2 2 4-4"/>
                 </svg>
             </div>
-
             <div>
-                <div class="brand-name">
-                    CYBER<span>SIM</span>
-                </div>
-                <span class="brand-tagline">
-                    INTERACTIVE CYBERSECURITY LAB
-                </span>
+                <div class="brand-name">CYBER<span>SIM</span></div>
+                <span class="brand-tagline">INTERACTIVE CYBERSECURITY LAB</span>
             </div>
-
         </a>
-
-        <a class="header-link" href="../index.html">
-            ← All modules
-        </a>
-
+        <a class="header-link" href="../index.html">← All modules</a>
     </div>
 </header>
-
 
 <main class="wrapper page">
 
@@ -537,145 +610,449 @@
         <span>Module 01</span>
     </div>
 
-    <span class="module-label">
-        MODULE 01 / 08 · FOUNDATIONS
-    </span>
+    <span class="module-label">MODULE 01 / 08 · FOUNDATIONS</span>
 
-    <h1 class="page-title">
-        Cybersecurity Basics
-    </h1>
+    <h1 class="page-title">Cybersecurity Fundamentals</h1>
 
     <p class="page-description">
-        Discover the foundations of cybersecurity, understand
-        why protecting digital information matters, and practise
-        making safer security decisions.
+        Explore the principles, terminology and practices that
+        underpin cybersecurity. Learn how to identify risks,
+        understand security controls and protect digital assets.
     </p>
 
-
     <section class="section">
-        <h2 class="section-heading">
-            What you will learn
-        </h2>
+        <h2 class="section-heading">Learning objectives</h2>
+        <p class="section-intro">
+            By the end of this module, you should be able to explain
+            fundamental security principles, distinguish common
+            security terms and perform a basic risk assessment.
+        </p>
 
         <div class="objectives">
-
             <div class="objective">
                 <strong>01 · Understand</strong>
-                Learn what cybersecurity means and why it matters.
+                Explain cybersecurity and the CIA triad.
             </div>
-
             <div class="objective">
-                <strong>02 · Recognise</strong>
-                Identify common everyday security risks.
+                <strong>02 · Analyse</strong>
+                Identify assets, threats, vulnerabilities and risks.
             </div>
-
             <div class="objective">
-                <strong>03 · Respond</strong>
-                Practise making responsible security decisions.
+                <strong>03 · Apply</strong>
+                Recommend appropriate security controls.
             </div>
-
         </div>
     </section>
 
-
-    <section class="simulation">
-
-        <div class="simulation-header">
-            <h2>Interactive Security Simulation</h2>
-            <span>SCENARIO 01 · BEGINNER</span>
-        </div>
-
-        <div class="simulation-body">
-
-            <div class="scenario-label">
-                REAL-WORLD SITUATION
-            </div>
-
-            <h2 class="scenario-title">
-                An unattended computer
-            </h2>
-
-            <p class="scenario-description">
-                You are walking through a shared office or learning
-                space when you notice an unattended computer.
-                The computer is switched on, unlocked and displaying
-                someone's personal workspace.
-
-                <br><br>
-
-                No one is currently sitting at the computer.
-                You realise that anyone nearby could potentially
-                access information or make changes.
+    <section class="section">
+        <h2 class="section-heading">01. What is cybersecurity?</h2>
+        <div class="explain">
+            <h3>Protecting digital systems and information</h3>
+            <p>
+                Cybersecurity is the practice of protecting computers,
+                networks, applications and information against
+                unauthorised access, disruption, alteration or destruction.
             </p>
-
-            <p class="question">
-                What is the most responsible action to take?
+            <p>
+                It involves people, processes and technology. Strong
+                cybersecurity is not achieved by installing one security
+                product. It requires multiple safeguards, good decisions
+                and continuous monitoring.
             </p>
-
-            <div class="options" id="options">
-
-                <button class="option-button"
-                    onclick="checkAnswer(0)">
-                    A. Leave the computer unattended and walk away.
-                </button>
-
-                <button class="option-button"
-                    onclick="checkAnswer(1)">
-                    B. Lock the computer and inform the owner or
-                    responsible staff member.
-                </button>
-
-                <button class="option-button"
-                    onclick="checkAnswer(2)">
-                    C. Open the files to find out who owns the computer.
-                </button>
-
+            <div class="term">
+                <strong>Example</strong>
+                <p>
+                    A school protects student records by restricting
+                    access, using strong authentication, maintaining
+                    backups and training staff to recognise phishing.
+                </p>
             </div>
-
-            <div class="feedback" id="feedback"
-                 role="status" aria-live="polite">
-            </div>
-
-            <div class="simulation-actions">
-                <button class="secondary-button"
-                    onclick="resetSimulation()">
-                    ↻ Try Again
-                </button>
-            </div>
-
         </div>
-
     </section>
 
+    <section class="section">
+        <h2 class="section-heading">02. The CIA triad</h2>
+        <p class="section-intro">
+            The CIA triad is a foundational model used to describe
+            three important goals of information security.
+        </p>
+
+        <div class="cia-grid">
+            <div class="cia-card">
+                <h3>Confidentiality</h3>
+                <p>
+                    Information should only be accessible to people
+                    and systems that are authorised to view it.
+                </p>
+                <div class="term">
+                    <strong>Example</strong>
+                    <p>
+                        Student records are protected with access
+                        permissions so unauthorised people cannot
+                        read private information.
+                    </p>
+                </div>
+            </div>
+
+            <div class="cia-card">
+                <h3>Integrity</h3>
+                <p>
+                    Information should remain accurate and protected
+                    against unauthorised changes.
+                </p>
+                <div class="term">
+                    <strong>Example</strong>
+                    <p>
+                        Only authorised staff can update examination
+                        results, and changes are recorded for review.
+                    </p>
+                </div>
+            </div>
+
+            <div class="cia-card">
+                <h3>Availability</h3>
+                <p>
+                    Systems and information should be accessible
+                    when authorised users need them.
+                </p>
+                <div class="term">
+                    <strong>Example</strong>
+                    <p>
+                        Regular backups and recovery plans help a
+                        school restore access after a system failure.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-heading">03. Essential security terminology</h2>
+        <p class="section-intro">
+            Understanding these terms helps security professionals
+            describe problems accurately and decide how to address them.
+        </p>
+
+        <div class="lesson-grid">
+            <div class="lesson-card">
+                <h3>Asset</h3>
+                <p>
+                    Something valuable that needs protection, such
+                    as a laptop, customer database or network.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Threat</h3>
+                <p>
+                    A potential cause of harm, such as ransomware,
+                    a malicious insider or accidental data loss.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Vulnerability</h3>
+                <p>
+                    A weakness that could be exploited, such as
+                    outdated software or weak access controls.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Risk</h3>
+                <p>
+                    The possibility and potential impact of a threat
+                    exploiting a vulnerability.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Security control</h3>
+                <p>
+                    A safeguard that reduces risk, such as
+                    encryption, backups or multi-factor authentication.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Attack surface</h3>
+                <p>
+                    The points where a system could potentially
+                    be accessed or attacked.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-heading">04. Common security threats</h2>
+        <p class="section-intro">
+            Organisations face different kinds of threats. Each
+            threat can affect confidentiality, integrity or availability.
+        </p>
+
+        <div class="lesson-grid">
+            <div class="lesson-card">
+                <h3>Phishing</h3>
+                <p>
+                    Deceptive messages that attempt to steal
+                    credentials, financial information or other data.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Malware</h3>
+                <p>
+                    Malicious software that can damage systems,
+                    disrupt operations or expose information.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Insider threats</h3>
+                <p>
+                    Security risks caused by people with legitimate
+                    access, whether through malicious actions or mistakes.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Weak authentication</h3>
+                <p>
+                    Poor passwords or missing additional verification
+                    can make accounts easier to compromise.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Denial of service</h3>
+                <p>
+                    Attacks that overwhelm a service and prevent
+                    legitimate users from accessing it.
+                </p>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Misconfiguration</h3>
+                <p>
+                    Incorrect system settings that may expose
+                    services or information unnecessarily.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-heading">05. Defence in depth</h2>
+        <p class="section-intro">
+            Defence in depth uses multiple complementary security
+            layers. If one control fails, other controls can still
+            reduce the likelihood or impact of an incident.
+        </p>
+
+        <div class="explain">
+            <h3>Think in layers, not single solutions</h3>
+
+            <div class="term">
+                <strong>Physical security</strong>
+                <p>
+                    Locks, secure rooms, device protection and
+                    controlled facility access.
+                </p>
+            </div>
+
+            <div class="term">
+                <strong>Identity and access</strong>
+                <p>
+                    Unique accounts, least privilege and
+                    multi-factor authentication.
+                </p>
+            </div>
+
+            <div class="term">
+                <strong>Network and endpoint security</strong>
+                <p>
+                    Firewalls, endpoint protection, network
+                    segmentation and secure configurations.
+                </p>
+            </div>
+
+            <div class="term">
+                <strong>Data protection</strong>
+                <p>
+                    Encryption, backups, access restrictions
+                    and appropriate retention policies.
+                </p>
+            </div>
+
+            <div class="term">
+                <strong>Monitoring and response</strong>
+                <p>
+                    Reviewing security events, reporting incidents
+                    and following recovery procedures.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="lab">
+        <div class="lab-header">
+            <h2>Practical Lab 01 — Security Risk Assessment</h2>
+            <p>SCENARIO-BASED INVESTIGATION · BEGINNER LEVEL</p>
+        </div>
+
+        <div class="lab-body">
+            <div class="lab-label">YOUR ROLE: JUNIOR SECURITY ANALYST</div>
+
+            <div class="scenario-box">
+                <h3>Case file: Greenfield Training Centre</h3>
+                <p>
+                    Greenfield is a small training centre that stores
+                    student records on an office laptop. Staff use the
+                    same wireless network for administrative work and
+                    guest internet access.
+                </p>
+
+                <ul class="evidence-list">
+                    <li><strong>Asset:</strong> Laptop containing student records.</li>
+                    <li><strong>Finding 01:</strong> The router still uses its default administrator password.</li>
+                    <li><strong>Finding 02:</strong> Software updates have been delayed.</li>
+                    <li><strong>Finding 03:</strong> Guest devices share the staff network.</li>
+                    <li><strong>Finding 04:</strong> The laptop has no recent verified backup.</li>
+                </ul>
+            </div>
+
+            <p class="lab-question">
+                Investigation 1 of 3: Which asset needs protection?
+            </p>
+
+            <div class="options" id="labOptions1">
+                <button class="option" onclick="checkLab(1,0)">
+                    A. The colour of the laptop.
+                </button>
+                <button class="option" onclick="checkLab(1,1)">
+                    B. The laptop and the student records stored on it.
+                </button>
+                <button class="option" onclick="checkLab(1,2)">
+                    C. The number of chairs in the training centre.
+                </button>
+            </div>
+
+            <div class="feedback" id="labFeedback1" role="status" aria-live="polite"></div>
+
+            <p class="lab-question">
+                Investigation 2 of 3: Which finding represents a vulnerability?
+            </p>
+
+            <div class="options" id="labOptions2">
+                <button class="option" onclick="checkLab(2,0)">
+                    A. A malicious person trying to gain access.
+                </button>
+                <button class="option" onclick="checkLab(2,1)">
+                    B. The possibility of records being exposed.
+                </button>
+                <button class="option" onclick="checkLab(2,2)">
+                    C. The router's unchanged default administrator password.
+                </button>
+            </div>
+
+            <div class="feedback" id="labFeedback2" role="status" aria-live="polite"></div>
+
+            <p class="lab-question">
+                Investigation 3 of 3: Which action is the strongest immediate improvement to network access control?
+            </p>
+
+            <div class="options" id="labOptions3">
+                <button class="option" onclick="checkLab(3,0)">
+                    A. Change the default administrator password and separate the guest network from staff systems.
+                </button>
+                <button class="option" onclick="checkLab(3,1)">
+                    B. Give every visitor the administrator password.
+                </button>
+                <button class="option" onclick="checkLab(3,2)">
+                    C. Disable all software updates permanently.
+                </button>
+            </div>
+
+            <div class="feedback" id="labFeedback3" role="status" aria-live="polite"></div>
+
+            <div class="lab-actions">
+                <button class="secondary-button" onclick="resetLab()">
+                    ↻ Reset investigation
+                </button>
+            </div>
+        </div>
+    </section>
 
     <section class="takeaway">
-        <h3>Key takeaway</h3>
+        <h3>Professional takeaway</h3>
         <p>
-            An unattended, unlocked computer can expose sensitive
-            information. Always respect other people's privacy.
-            Where appropriate and authorised, secure the computer
-            and report the situation to its owner or responsible staff.
+            Good security begins with identifying valuable assets,
+            understanding threats and vulnerabilities, assessing
+            risk and selecting suitable controls. Security is an
+            ongoing process, not a one-time installation.
         </p>
     </section>
 
+    <section class="assessment">
+        <div class="assessment-header">
+            <h2>Module 01 — Knowledge Assessment</h2>
+            <p>Five questions · One point per correct answer</p>
+        </div>
 
-    <nav class="module-navigation"
-         aria-label="Module navigation">
+        <div class="assessment-body">
+            <div class="progress-info">
+                <span id="assessmentNumber">Question 1 of 5</span>
+                <span id="assessmentScore">Score: 0</span>
+            </div>
 
-        <a class="nav-button home"
-           href="../index.html">
-            🏠 Home
-        </a>
+            <div class="progress-track"
+                 role="progressbar"
+                 aria-label="Assessment progress"
+                 aria-valuemin="0"
+                 aria-valuemax="5"
+                 aria-valuenow="0"
+                 id="assessmentTrack">
+                <div class="progress-fill" id="assessmentFill"></div>
+            </div>
 
-        <a class="nav-button"
-           href="../02-phishing/">
-            Next Module →
-        </a>
+            <p class="assessment-question" id="assessmentQuestion"></p>
 
+            <div class="options" id="assessmentOptions"></div>
+
+            <div class="assessment-feedback"
+                 id="assessmentFeedback"
+                 role="status"
+                 aria-live="polite"></div>
+
+            <div class="lab-actions">
+                <button class="primary-button"
+                    id="assessmentNext"
+                    onclick="nextAssessment()"
+                    disabled>
+                    Next question →
+                </button>
+
+                <button class="secondary-button"
+                    onclick="restartAssessment()">
+                    ↻ Retake assessment
+                </button>
+            </div>
+
+            <div class="results" id="assessmentResults">
+                <h3>Assessment completed</h3>
+                <span class="results-score" id="finalScore">0 / 5</span>
+                <p id="finalMessage"></p>
+            </div>
+        </div>
+    </section>
+
+    <nav class="module-navigation" aria-label="Module navigation">
+        <a class="nav-button" href="../index.html">← Home</a>
+        <a class="nav-button home" href="../02-phishing/">Next Module →</a>
     </nav>
 
 </main>
-
 
 <footer class="footer">
     <div class="wrapper footer-inner">
@@ -684,53 +1061,55 @@
     </div>
 </footer>
 
-
 <script>
-    const feedback = document.getElementById("feedback");
-    const optionButtons = document.querySelectorAll(".option-button");
+const labAnswers = {
+    1: {
+        answer: 1,
+        explanation: "Correct. The laptop is an asset, and the student records it stores are valuable information that needs protection."
+    },
+    2: {
+        answer: 2,
+        explanation: "Correct. The unchanged default password is a vulnerability: a weakness that could be exploited. A malicious person is a threat, while potential exposure is a risk."
+    },
+    3: {
+        answer: 0,
+        explanation: "Correct. Changing default credentials and separating guest access from staff systems are sensible network security improvements. Updates and verified backups should also be addressed."
+    }
+};
 
-    const correctAnswer = 1;
+const labCompleted = new Set();
 
-    function checkAnswer(selectedOption) {
+function checkLab(stage, choice) {
+    if (labCompleted.has(stage)) return;
 
-        if (optionButtons[0].disabled) {
-            return;
-        }
+    const buttons = document.querySelectorAll("#labOptions" + stage + " button");
+    const feedback = document.getElementById("labFeedback" + stage);
+    const result = labAnswers[stage];
 
-        optionButtons.forEach(button => {
-            button.disabled = true;
-        });
+    buttons.forEach(button => button.disabled = true);
 
-        if (selectedOption === correctAnswer) {
-
-            optionButtons[selectedOption].classList.add("correct");
-
-            feedback.textContent =
-                "Correct! Locking the computer helps prevent " +
-                "unauthorised access. Informing the owner or " +
-                "responsible staff member ensures the situation " +
-                "is handled appropriately.";
-
-            feedback.className = "feedback success";
-
-        } else {
-
-            optionButtons[selectedOption].classList.add("incorrect");
-            optionButtons[correctAnswer].classList.add("correct");
-
-            feedback.textContent =
-                "Not quite. The safest response is to lock " +
-                "the computer where you are authorised to do so, " +
-                "then inform the owner or responsible staff member. " +
-                "Never explore another person's private files.";
-
-            feedback.className = "feedback error";
-        }
+    if (choice === result.answer) {
+        buttons[choice].classList.add("correct");
+        feedback.textContent = result.explanation;
+        feedback.className = "feedback success";
+    } else {
+        buttons[choice].classList.add("incorrect");
+        buttons[result.answer].classList.add("correct");
+        feedback.textContent = "Not quite. " + result.explanation;
+        feedback.className = "feedback error";
     }
 
-    function resetSimulation() {
+    labCompleted.add(stage);
+}
 
-        optionButtons.forEach(button => {
+function resetLab() {
+    labCompleted.clear();
+
+    for (let stage = 1; stage <= 3; stage++) {
+        const buttons = document.querySelectorAll("#labOptions" + stage + " button");
+        const feedback = document.getElementById("labFeedback" + stage);
+
+        buttons.forEach(button => {
             button.disabled = false;
             button.classList.remove("correct", "incorrect");
         });
@@ -738,6 +1117,168 @@
         feedback.textContent = "";
         feedback.className = "feedback";
     }
+}
+
+const assessmentQuestions = [
+    {
+        question: "Which part of the CIA triad focuses on preventing unauthorised people from viewing information?",
+        options: ["Availability", "Confidentiality", "Integrity"],
+        answer: 1,
+        explanation: "Confidentiality ensures information is only accessible to authorised people and systems."
+    },
+    {
+        question: "A company discovers that an employee has changed financial records without permission. Which security objective has been affected?",
+        options: ["Integrity", "Availability", "Confidentiality"],
+        answer: 0,
+        explanation: "Integrity concerns the accuracy and reliability of information and protection against unauthorised changes."
+    },
+    {
+        question: "An outdated application contains a known security weakness. What is this weakness called?",
+        options: ["Asset", "Threat", "Vulnerability"],
+        answer: 2,
+        explanation: "A vulnerability is a weakness that could be exploited by a threat."
+    },
+    {
+        question: "Which of these is an example of a security control?",
+        options: ["A weak password", "Multi-factor authentication", "An unknown attacker"],
+        answer: 1,
+        explanation: "Multi-factor authentication is a security control that adds another verification step."
+    },
+    {
+        question: "Why is defence in depth important?",
+        options: [
+            "It ensures only one security product is needed.",
+            "It removes every possible security risk.",
+            "It provides multiple layers of protection if one control fails."
+        ],
+        answer: 2,
+        explanation: "Defence in depth uses complementary safeguards to reduce the chance and impact of security incidents."
+    }
+];
+
+let currentQuestion = 0;
+let score = 0;
+let answered = false;
+
+const questionEl = document.getElementById("assessmentQuestion");
+const optionsEl = document.getElementById("assessmentOptions");
+const feedbackEl = document.getElementById("assessmentFeedback");
+const nextEl = document.getElementById("assessmentNext");
+const numberEl = document.getElementById("assessmentNumber");
+const scoreEl = document.getElementById("assessmentScore");
+const fillEl = document.getElementById("assessmentFill");
+const trackEl = document.getElementById("assessmentTrack");
+const resultsEl = document.getElementById("assessmentResults");
+
+function loadAssessment() {
+    answered = false;
+
+    const question = assessmentQuestions[currentQuestion];
+
+    numberEl.textContent =
+        "Question " + (currentQuestion + 1) + " of 5";
+
+    scoreEl.textContent = "Score: " + score;
+    questionEl.textContent = question.question;
+
+    fillEl.style.width =
+        (currentQuestion / assessmentQuestions.length * 100) + "%";
+
+    trackEl.setAttribute("aria-valuenow", currentQuestion);
+
+    optionsEl.innerHTML = "";
+
+    question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option";
+        button.textContent = String.fromCharCode(65 + index) + ". " + option;
+        button.addEventListener("click", () => answerAssessment(index));
+        optionsEl.appendChild(button);
+    });
+
+    feedbackEl.textContent = "";
+    feedbackEl.className = "assessment-feedback";
+    nextEl.disabled = true;
+    nextEl.textContent =
+        currentQuestion === assessmentQuestions.length - 1
+        ? "Finish assessment →"
+        : "Next question →";
+
+    resultsEl.classList.remove("visible");
+}
+
+function answerAssessment(choice) {
+    if (answered) return;
+
+    answered = true;
+
+    const question = assessmentQuestions[currentQuestion];
+    const buttons = optionsEl.querySelectorAll("button");
+
+    buttons.forEach(button => button.disabled = true);
+
+    if (choice === question.answer) {
+        score++;
+        buttons[choice].classList.add("correct");
+        feedbackEl.textContent = "Correct! " + question.explanation;
+    } else {
+        buttons[choice].classList.add("incorrect");
+        buttons[question.answer].classList.add("correct");
+        feedbackEl.textContent = "Not quite. " + question.explanation;
+    }
+
+    feedbackEl.className = "assessment-feedback visible";
+    scoreEl.textContent = "Score: " + score;
+    nextEl.disabled = false;
+}
+
+function nextAssessment() {
+    if (!answered) return;
+
+    currentQuestion++;
+
+    if (currentQuestion >= assessmentQuestions.length) {
+        showAssessmentResults();
+    } else {
+        loadAssessment();
+    }
+}
+
+function showAssessmentResults() {
+    numberEl.textContent = "Assessment completed";
+    questionEl.textContent = "You have completed Module 01.";
+    optionsEl.innerHTML = "";
+    feedbackEl.className = "assessment-feedback";
+    fillEl.style.width = "100%";
+    trackEl.setAttribute("aria-valuenow", 5);
+    nextEl.style.display = "none";
+
+    document.getElementById("finalScore").textContent =
+        score + " / 5";
+
+    let message;
+
+    if (score === 5) {
+        message = "Excellent work. You demonstrated a strong understanding of the fundamentals.";
+    } else if (score >= 3) {
+        message = "Good progress. Review the explanations and revisit any concepts you found difficult.";
+    } else {
+        message = "Keep learning. Review the lesson sections and attempt the assessment again.";
+    }
+
+    document.getElementById("finalMessage").textContent = message;
+    resultsEl.classList.add("visible");
+}
+
+function restartAssessment() {
+    currentQuestion = 0;
+    score = 0;
+    nextEl.style.display = "inline-block";
+    loadAssessment();
+}
+
+loadAssessment();
 </script>
 
 </body>
