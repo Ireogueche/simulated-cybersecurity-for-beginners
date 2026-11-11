@@ -1,1 +1,97 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Basics Simulation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .container {
+            background: white;
+            max-width: 550px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 6px;
+            background: #174ea6;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #103675;
+        }
+
+        #feedback {
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🛡️ Cybersecurity Basics</h1>
+
+    <p>Welcome to your first cybersecurity simulation!</p>
+
+    <h3>Scenario 1</h3>
+
+    <p>
+        You leave your computer unlocked when you walk away.
+        Someone could access your private files.
+    </p>
+
+    <h3>What should you do?</h3>
+
+    <button onclick="checkAnswer(false)">
+        Leave the computer open
+    </button>
+
+    <button onclick="checkAnswer(true)">
+        Lock the computer before leaving
+    </button>
+
+    <button onclick="checkAnswer(false)">
+        Share your password
+    </button>
+
+    <p id="feedback"></p>
+</div>
+
+<script>
+    function checkAnswer(correct) {
+        const feedback = document.getElementById("feedback");
+
+        if (correct) {
+            feedback.textContent =
+                "Correct! Locking your computer helps protect your information.";
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent =
+                "Not quite! Try again. Think about how to protect your files.";
+            feedback.style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>
+
