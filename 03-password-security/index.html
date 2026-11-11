@@ -4,41 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Security Simulator</title>
+    <title>Password Security Simulation</title>
 
     <style>
         body {
             font-family: Arial, sans-serif;
             background: #f1f5f9;
-            padding: 25px;
+            padding: 20px;
+            text-align: center;
         }
 
         .container {
-            max-width: 550px;
+            max-width: 650px;
             margin: auto;
             background: white;
             padding: 25px;
             border-radius: 12px;
         }
 
+        h1 {
+            color: #2563eb;
+        }
+
         input {
-            width: 95%;
+            width: 90%;
             padding: 12px;
-            margin: 10px 0;
+            margin: 15px 0;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
         }
 
         button {
+            display: block;
+            width: 100%;
             padding: 12px;
-            background: #174ea6;
-            color: white;
+            margin: 10px 0;
             border: none;
             border-radius: 6px;
+            background: #2563eb;
+            color: white;
             cursor: pointer;
+            font-size: 16px;
         }
 
-        #result {
-            margin-top: 15px;
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #feedback {
+            margin-top: 20px;
             font-weight: bold;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            background: #16a34a;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 6px;
+            flex: 1;
+        }
+
+        .navigation a:first-child {
+            background: #2563eb;
         }
     </style>
 </head>
@@ -49,23 +85,51 @@
 
     <h1>🔐 Password Security</h1>
 
-    <p>Enter a sample password to test its strength.</p>
+    <p>Learn how to recognize strong passwords.</p>
 
-    <p><strong>Do not enter your real password.</strong></p>
+    <p>
+        Enter a SAMPLE password to test its strength.
+        Never enter your real password.
+    </p>
 
-    <input type="text" id="password"
-        placeholder="Enter a sample password">
+    <input
+        type="text"
+        id="password"
+        placeholder="Enter a sample password"
+    >
 
-    <button onclick="checkPassword()">Check Password</button>
+    <button onclick="checkPassword()">
+        Check Password Strength
+    </button>
 
-    <p id="result"></p>
+    <p id="feedback"></p>
+
+    <div class="navigation">
+        <a href="../02-phishing/">
+            ← Previous Module
+        </a>
+
+        <a href="../index.html">
+            🏠 Home
+        </a>
+
+        <a href="../04-social-engineering/">
+            Next Module →
+        </a>
+    </div>
 
 </div>
 
 <script>
     function checkPassword() {
         const password = document.getElementById("password").value;
-        const result = document.getElementById("result");
+        const feedback = document.getElementById("feedback");
+
+        if (password.length === 0) {
+            feedback.textContent = "Please enter a sample password.";
+            feedback.style.color = "red";
+            return;
+        }
 
         let score = 0;
 
@@ -75,14 +139,15 @@
         if (/[0-9]/.test(password)) score++;
         if (/[^A-Za-z0-9]/.test(password)) score++;
 
-        if (password.length === 0) {
-            result.textContent = "Please enter a sample password.";
-        } else if (score <= 2) {
-            result.textContent = "Weak password. Try making it stronger.";
+        if (score <= 2) {
+            feedback.textContent = "Weak password. Try adding more security features.";
+            feedback.style.color = "red";
         } else if (score <= 4) {
-            result.textContent = "Moderate password. You can improve it.";
+            feedback.textContent = "Good password! You can make it stronger.";
+            feedback.style.color = "orange";
         } else {
-            result.textContent = "Strong password! Good job.";
+            feedback.textContent = "Strong sample password! Great job.";
+            feedback.style.color = "green";
         }
     }
 </script>
