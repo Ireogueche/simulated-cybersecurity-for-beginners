@@ -4,180 +4,985 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Linux Basics Simulation</title>
+
+    <meta name="description" content="Learn basic Linux terminal commands through an interactive beginner-friendly cybersecurity challenge.">
+
+    <title>CYBERSIM | Module 07 – Linux Basics</title>
 
     <style>
+        :root {
+            --green: #193329;
+            --green-light: #294337;
+            --lime: #d2e878;
+            --paper: #f5f6f1;
+            --white: #ffffff;
+            --ink: #192720;
+            --muted: #69766e;
+            --line: #e1e6de;
+            --soft: #edf1e8;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            padding: 20px;
-            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 650px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-        }
-
-        h1 {
-            color: #2563eb;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
         button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 6px;
-            background: #2563eb;
-            color: white;
+            font: inherit;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
-            background: #1d4ed8;
+        .wrapper {
+            width: min(1080px, calc(100% - 40px));
+            margin: auto;
         }
 
-        #feedback {
-            margin-top: 20px;
-            font-weight: bold;
+        /* HEADER */
+
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+            background: var(--white);
         }
 
-        .navigation {
+        .header-inner {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            margin-top: 30px;
+            align-items: center;
+            gap: 20px;
         }
 
-        .navigation a {
-            background: #16a34a;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            background: var(--green);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: var(--lime);
+        }
+
+        .brand-mark svg {
+            width: 27px;
+            height: 27px;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            line-height: 1.2;
+            font-weight: 900;
+            letter-spacing: 1.6px;
+        }
+
+        .brand-name span {
+            color: #819d40;
+        }
+
+        .brand-tagline {
+            display: block;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .header-link {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .header-link:hover {
+            color: #769438;
+        }
+
+        /* PAGE INTRODUCTION */
+
+        .page {
+            padding: 48px 0 65px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--green);
+        }
+
+        .module-label {
+            display: inline-block;
+            color: #607b32;
+            background: #edf2df;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 47px);
+            line-height: 1.13;
+            letter-spacing: -1.8px;
+            margin-bottom: 14px;
+        }
+
+        .page-description {
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        /* LEARNING OBJECTIVES */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-heading {
+            font-size: 19px;
+            letter-spacing: -0.5px;
+            margin-bottom: 17px;
+        }
+
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 13px;
+        }
+
+        .objective {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 17px;
+            font-size: 12px;
+            color: #536158;
+        }
+
+        .objective strong {
+            display: block;
+            color: var(--green);
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        /* SIMULATION */
+
+        .simulation {
+            margin-top: 39px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .simulation-header {
+            background: var(--green);
             color: white;
-            padding: 12px;
-            text-decoration: none;
-            border-radius: 6px;
-            flex: 1;
+            padding: 21px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
         }
 
-        .navigation a:first-child {
-            background: #2563eb;
+        .simulation-header h2 {
+            font-size: 15px;
+            letter-spacing: 0.2px;
+        }
+
+        .simulation-header span {
+            color: var(--lime);
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .simulation-body {
+            padding: 27px;
+        }
+
+        .scenario-label {
+            color: #718744;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin-bottom: 11px;
+        }
+
+        .scenario-title {
+            font-size: 21px;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .scenario-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 720px;
+        }
+
+        /* TERMINAL */
+
+        .terminal {
+            margin-top: 23px;
+            border-radius: 9px;
+            overflow: hidden;
+            background: #14241e;
+            border: 1px solid #294337;
+        }
+
+        .terminal-top {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            background: #20382d;
+            padding: 12px 16px;
+            border-bottom: 1px solid #385243;
+        }
+
+        .terminal-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #7c9860;
+        }
+
+        .terminal-title {
+            color: #c5d4c9;
+            font-size: 10px;
+            font-weight: 700;
+            margin-left: 7px;
+            letter-spacing: 1px;
+        }
+
+        .terminal-content {
+            padding: 20px;
+            color: #e2eadd;
+            font-family: "SFMono-Regular", Consolas, monospace;
+            font-size: 12px;
+            line-height: 2;
+            overflow-x: auto;
+        }
+
+        .terminal-content p {
+            white-space: nowrap;
+        }
+
+        .terminal-prompt {
+            color: var(--lime);
+        }
+
+        .terminal-output {
+            color: #aebfb2;
+        }
+
+        /* QUIZ */
+
+        .quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 26px;
+            margin-bottom: 11px;
+        }
+
+        .quiz-progress strong {
+            font-size: 12px;
+            color: var(--green);
+        }
+
+        .quiz-progress span {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .progress-track {
+            height: 7px;
+            width: 100%;
+            background: #e7ebe3;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 25%;
+            background: #829b46;
+            border-radius: 10px;
+            transition: width 0.25s ease;
+        }
+
+        .question {
+            margin-top: 27px;
+            font-size: 15px;
+            font-weight: 750;
+        }
+
+        .options {
+            display: grid;
+            gap: 11px;
+            margin-top: 15px;
+        }
+
+        .option-button {
+            text-align: left;
+            width: 100%;
+            padding: 15px 17px;
+            background: #fafbf8;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 13px;
+            transition: border-color 0.2s,
+                background 0.2s, transform 0.2s;
+        }
+
+        .option-button:hover:not(:disabled) {
+            border-color: #92a95c;
+            background: #f3f6e9;
+            transform: translateY(-1px);
+        }
+
+        .option-button:disabled {
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        .option-button.correct {
+            border-color: #6e9e65;
+            background: #eef7e9;
+        }
+
+        .option-button.incorrect {
+            border-color: #d58b83;
+            background: #fcf0ee;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 19px;
+            padding: 17px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .feedback.success {
+            display: block;
+            background: #edf6e9;
+            border: 1px solid #c9dfbd;
+            color: #315c33;
+        }
+
+        .feedback.error {
+            display: block;
+            background: #fcf0ee;
+            border: 1px solid #edcfca;
+            color: #8b4038;
+        }
+
+        .quiz-actions {
+            display: flex;
+            gap: 11px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .primary-button {
+            border: none;
+            background: var(--green);
+            color: white;
+            padding: 12px 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .primary-button:hover {
+            background: var(--green-light);
+        }
+
+        .secondary-button {
+            border: 1px solid var(--line);
+            background: white;
+            color: var(--green);
+            padding: 12px 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .secondary-button:hover {
+            background: var(--soft);
+        }
+
+        /* TAKEAWAY */
+
+        .takeaway {
+            margin-top: 23px;
+            padding: 20px;
+            background: var(--soft);
+            border-left: 3px solid #8ea949;
+            border-radius: 5px;
+        }
+
+        .takeaway h3 {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .takeaway p {
+            color: #5e6a61;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* MODULE NAVIGATION */
+
+        .module-navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 39px;
+        }
+
+        .nav-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 14px 10px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            transition: background 0.2s;
+        }
+
+        .nav-button:hover {
+            background: var(--soft);
+        }
+
+        .nav-button.home {
+            background: var(--green);
+            color: white;
+            border-color: var(--green);
+        }
+
+        .nav-button.home:hover {
+            background: var(--green-light);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 23px 0;
+            background: white;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer strong {
+            color: var(--green);
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 650px) {
+            .wrapper {
+                width: calc(100% - 30px);
+            }
+
+            .page {
+                padding-top: 33px;
+            }
+
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+
+            .simulation-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .simulation-body {
+                padding: 20px;
+            }
+
+            .module-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .header-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<header class="header">
+    <div class="wrapper header-inner">
 
-    <h1>🐧 Linux Basics</h1>
+        <a href="../index.html" class="brand"
+           aria-label="CYBERSIM home">
 
-    <p>Welcome to the Linux Command Challenge!</p>
+            <div class="brand-mark">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     aria-hidden="true">
+                    <path d="M12 3 20 6v5c0 5-3.3 8.2-8 10-4.7-1.8-8-6.9-8-10V6l8-3Z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+            </div>
 
-    <h3 id="question">
-        What command shows your current location in the terminal?
-    </h3>
+            <div>
+                <div class="brand-name">
+                    CYBER<span>SIM</span>
+                </div>
+                <span class="brand-tagline">
+                    INTERACTIVE CYBERSECURITY LAB
+                </span>
+            </div>
 
-    <button onclick="checkAnswer('ls')">ls</button>
-    <button onclick="checkAnswer('pwd')">pwd</button>
-    <button onclick="checkAnswer('cd')">cd</button>
+        </a>
 
-    <p id="feedback"></p>
+        <a class="header-link" href="../index.html">
+            ← All modules
+        </a>
 
-    <button onclick="nextQuestion()">Next Question</button>
+    </div>
+</header>
 
-    <div class="navigation">
-        <a href="../06-malware/">
+
+<main class="wrapper page">
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>Module 07</span>
+    </div>
+
+    <span class="module-label">
+        MODULE 07 / 08 · COMMAND LINE
+    </span>
+
+    <h1 class="page-title">
+        Linux Basics
+    </h1>
+
+    <p class="page-description">
+        Get familiar with the Linux terminal and learn four
+        essential commands used to navigate directories,
+        manage folders and identify the current user.
+    </p>
+
+
+    <section class="section">
+        <h2 class="section-heading">
+            What you will learn
+        </h2>
+
+        <div class="objectives">
+
+            <div class="objective">
+                <strong>01 · Navigate</strong>
+                Learn how to find your current directory and list files.
+            </div>
+
+            <div class="objective">
+                <strong>02 · Create</strong>
+                Understand how to create a new directory.
+            </div>
+
+            <div class="objective">
+                <strong>03 · Identify</strong>
+                Learn how to display the current username.
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="simulation">
+
+        <div class="simulation-header">
+            <h2>Interactive Linux Command Challenge</h2>
+            <span>EXERCISE 01 · BEGINNER</span>
+        </div>
+
+        <div class="simulation-body">
+
+            <div class="scenario-label">
+                TERMINAL FUNDAMENTALS
+            </div>
+
+            <h2 class="scenario-title">
+                Get comfortable with Linux commands
+            </h2>
+
+            <p class="scenario-description">
+                Linux commands allow users to interact with a
+                computer through a terminal. Explore the sample
+                terminal below, then answer four questions to test
+                your understanding.
+            </p>
+
+            <div class="terminal">
+
+                <div class="terminal-top">
+                    <span class="terminal-dot"></span>
+                    <span class="terminal-dot"></span>
+                    <span class="terminal-dot"></span>
+                    <span class="terminal-title">
+                        LINUX TERMINAL — EXAMPLE
+                    </span>
+                </div>
+
+                <div class="terminal-content">
+                    <p><span class="terminal-prompt">user@cybersim:~$</span> pwd</p>
+                    <p class="terminal-output">/home/user</p>
+                    <p><span class="terminal-prompt">user@cybersim:~$</span> ls</p>
+                    <p class="terminal-output">Documents Downloads Pictures</p>
+                    <p><span class="terminal-prompt">user@cybersim:~$</span> whoami</p>
+                    <p class="terminal-output">user</p>
+                    <p><span class="terminal-prompt">user@cybersim:~$</span> mkdir practice</p>
+                    <p class="terminal-output">Directory created (example)</p>
+                </div>
+
+            </div>
+
+            <div class="quiz-progress">
+                <strong id="questionNumber">Question 1 of 4</strong>
+                <span id="scoreDisplay">Score: 0</span>
+            </div>
+
+            <div class="progress-track"
+                 role="progressbar"
+                 aria-label="Quiz progress"
+                 aria-valuemin="0"
+                 aria-valuemax="4"
+                 aria-valuenow="0"
+                 id="progressTrack">
+
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <p class="question" id="questionText">
+                What command displays your current directory?
+            </p>
+
+            <div class="options" id="options"></div>
+
+            <div class="feedback" id="feedback"
+                 role="status" aria-live="polite">
+            </div>
+
+            <div class="quiz-actions">
+
+                <button class="primary-button"
+                    id="nextButton"
+                    onclick="nextQuestion()"
+                    disabled>
+                    Next Question →
+                </button>
+
+                <button class="secondary-button"
+                    onclick="restartQuiz()">
+                    ↻ Restart Challenge
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+        <h3>Key takeaway</h3>
+        <p>
+            Linux commands provide a powerful way to interact
+            with an operating system. Start by understanding
+            common commands such as pwd, ls, mkdir and whoami.
+            Practise in a safe learning environment before
+            using commands on systems you do not own or manage.
+        </p>
+    </section>
+
+
+    <nav class="module-navigation"
+         aria-label="Module navigation">
+
+        <a class="nav-button"
+           href="../06-malware/">
             ← Previous Module
         </a>
 
-        <a href="../index.html">
+        <a class="nav-button home"
+           href="../index.html">
             🏠 Home
         </a>
 
-        <a href="../08-online-safety/">
+        <a class="nav-button"
+           href="../08-online-safety/">
             Next Module →
         </a>
-    </div>
 
-</div>
+    </nav>
+
+</main>
+
+
+<footer class="footer">
+    <div class="wrapper footer-inner">
+        <strong>CYBERSIM</strong>
+        <p>Interactive Cybersecurity Lab · Module 07 of 08</p>
+    </div>
+</footer>
+
 
 <script>
     const questions = [
         {
-            question: "What command shows your current location in the terminal?",
+            question: "What command displays your current directory?",
             options: ["ls", "pwd", "cd"],
-            answer: "pwd",
-            explanation: "Correct! pwd shows your current directory."
+            answer: 1,
+            explanation:
+                "Correct! pwd means Print Working Directory. " +
+                "It displays your current location in the filesystem."
         },
         {
-            question: "What command lists files and folders?",
-            options: ["mkdir", "ls", "whoami"],
-            answer: "ls",
-            explanation: "Correct! ls displays files and folders."
+            question: "Which command lists files and folders?",
+            options: ["whoami", "mkdir", "ls"],
+            answer: 2,
+            explanation:
+                "Correct! ls lists the files and directories " +
+                "in your current location."
         },
         {
-            question: "What command creates a new folder?",
-            options: ["mkdir", "cat", "pwd"],
-            answer: "mkdir",
-            explanation: "Correct! mkdir creates a new directory."
+            question: "Which command creates a new directory?",
+            options: ["mkdir", "pwd", "whoami"],
+            answer: 0,
+            explanation:
+                "Correct! mkdir means Make Directory. " +
+                "It creates a new folder."
         },
         {
-            question: "What command shows your username?",
-            options: ["clear", "cd", "whoami"],
-            answer: "whoami",
-            explanation: "Correct! whoami displays your current username."
+            question: "Which command displays your current username?",
+            options: ["cd", "ls", "whoami"],
+            answer: 2,
+            explanation:
+                "Correct! whoami displays the username of " +
+                "the currently logged-in user."
         }
     ];
 
     let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
+
+    const questionText = document.getElementById("questionText");
+    const optionsContainer = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const nextButton = document.getElementById("nextButton");
+    const questionNumber = document.getElementById("questionNumber");
+    const scoreDisplay = document.getElementById("scoreDisplay");
+    const progressFill = document.getElementById("progressFill");
+    const progressTrack = document.getElementById("progressTrack");
 
     function loadQuestion() {
-        document.getElementById("question").textContent =
-            questions[currentQuestion].question;
+        answered = false;
 
-        const buttons = document.querySelectorAll(".container button");
+        const question = questions[currentQuestion];
 
-        questions[currentQuestion].options.forEach((option, index) => {
-            buttons[index].textContent = option;
-            buttons[index].onclick = () => checkAnswer(option);
+        questionText.textContent = question.question;
+        questionNumber.textContent =
+            "Question " + (currentQuestion + 1) +
+            " of " + questions.length;
+
+        scoreDisplay.textContent = "Score: " + score;
+
+        progressFill.style.width =
+            (currentQuestion / questions.length * 100) + "%";
+
+        progressTrack.setAttribute("aria-valuenow", currentQuestion);
+
+        optionsContainer.innerHTML = "";
+
+        question.options.forEach((option, index) => {
+            const button = document.createElement("button");
+
+            button.type = "button";
+            button.className = "option-button";
+            button.textContent =
+                String.fromCharCode(65 + index) + ". " + option;
+
+            button.addEventListener("click", function () {
+                checkAnswer(index);
+            });
+
+            optionsContainer.appendChild(button);
         });
 
-        document.getElementById("feedback").textContent = "";
+        feedback.textContent = "";
+        feedback.className = "feedback";
+        nextButton.disabled = true;
+        nextButton.textContent = "Next Question →";
+        nextButton.style.display = "inline-block";
     }
 
-    function checkAnswer(choice) {
-        const feedback = document.getElementById("feedback");
+    function checkAnswer(selectedOption) {
+        if (answered) return;
 
-        if (choice === questions[currentQuestion].answer) {
-            feedback.textContent = questions[currentQuestion].explanation;
-            feedback.style.color = "green";
+        answered = true;
+
+        const question = questions[currentQuestion];
+        const buttons = optionsContainer.querySelectorAll("button");
+
+        buttons.forEach(button => {
+            button.disabled = true;
+        });
+
+        if (selectedOption === question.answer) {
+            score++;
+
+            buttons[selectedOption].classList.add("correct");
+
+            feedback.textContent = question.explanation;
+            feedback.className = "feedback success";
+
         } else {
-            feedback.textContent = "Not quite! Try again.";
-            feedback.style.color = "red";
+            buttons[selectedOption].classList.add("incorrect");
+            buttons[question.answer].classList.add("correct");
+
+            feedback.textContent =
+                "Not quite. " + question.explanation;
+
+            feedback.className = "feedback error";
         }
+
+        scoreDisplay.textContent = "Score: " + score;
+        nextButton.disabled = false;
+
+        nextButton.textContent =
+            currentQuestion === questions.length - 1
+            ? "Finish Challenge →"
+            : "Next Question →";
     }
 
     function nextQuestion() {
+        if (!answered) return;
+
         currentQuestion++;
 
         if (currentQuestion >= questions.length) {
-            document.getElementById("question").textContent =
-                "🎉 Congratulations! You completed the Linux challenge!";
-
-            document.getElementById("feedback").textContent =
-                "You have learned some basic Linux commands.";
-
-            document.querySelectorAll(".container button").forEach(button => {
-                button.style.display = "none";
-            });
-
+            showResults();
             return;
         }
+
+        loadQuestion();
+    }
+
+    function showResults() {
+        questionNumber.textContent = "Challenge completed";
+
+        questionText.textContent =
+            "Congratulations! You completed the Linux command challenge.";
+
+        progressFill.style.width = "100%";
+        progressTrack.setAttribute("aria-valuenow", questions.length);
+
+        optionsContainer.innerHTML = "";
+
+        feedback.textContent =
+            "Your final score: " + score + " out of " +
+            questions.length + ". " +
+            (score === questions.length
+                ? "Excellent work! You answered every question correctly."
+                : "Keep practising these commands to strengthen your understanding.");
+
+        feedback.className =
+            score === questions.length
+            ? "feedback success"
+            : "feedback success";
+
+        nextButton.textContent = "Try Again ↻";
+        nextButton.disabled = false;
+        nextButton.onclick = restartQuiz;
+    }
+
+    function restartQuiz() {
+        currentQuestion = 0;
+        score = 0;
+
+        nextButton.onclick = nextQuestion;
 
         loadQuestion();
     }
