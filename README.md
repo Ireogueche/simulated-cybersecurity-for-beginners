@@ -9,7 +9,7 @@ An interactive, beginner-friendly cybersecurity learning lab designed to teach e
 
 ## 🖥️ Project Preview
 
-![CYBERSIM Homepage](cybersim-homepage.png)
+![CYBERSIM Homepage]([cybersim-homepage.png](https://github.com/Ireogueche/simulated-cybersecurity-for-beginners/blob/main/image.png))
 
 ## 📚 Learning Modules
 
