@@ -15,7 +15,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: auto;
             background: white;
             padding: 25px;
@@ -47,17 +47,40 @@
             margin-top: 20px;
             font-weight: bold;
         }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            background: #16a34a;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 6px;
+            flex: 1;
+        }
+
+        .navigation a:first-child {
+            background: #2563eb;
+        }
     </style>
 </head>
 
 <body>
 
 <div class="container">
+
     <h1>🐧 Linux Basics</h1>
 
     <p>Welcome to the Linux Command Challenge!</p>
 
-    <h3 id="question">What command shows your current location in the terminal?</h3>
+    <h3 id="question">
+        What command shows your current location in the terminal?
+    </h3>
 
     <button onclick="checkAnswer('ls')">ls</button>
     <button onclick="checkAnswer('pwd')">pwd</button>
@@ -66,6 +89,21 @@
     <p id="feedback"></p>
 
     <button onclick="nextQuestion()">Next Question</button>
+
+    <div class="navigation">
+        <a href="../06-malware/">
+            ← Previous Module
+        </a>
+
+        <a href="../index.html">
+            🏠 Home
+        </a>
+
+        <a href="../08-online-safety/">
+            Next Module →
+        </a>
+    </div>
+
 </div>
 
 <script>
