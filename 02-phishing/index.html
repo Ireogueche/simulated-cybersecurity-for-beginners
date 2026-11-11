@@ -4,155 +4,862 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phishing Awareness Simulation</title>
+
+    <meta name="description" content="Learn to recognise phishing emails and respond safely through an interactive cybersecurity simulation.">
+
+    <title>CYBERSIM | Module 02 – Phishing Awareness</title>
 
     <style>
+        :root {
+            --green: #193329;
+            --green-light: #294337;
+            --lime: #d2e878;
+            --paper: #f5f6f1;
+            --white: #ffffff;
+            --ink: #192720;
+            --muted: #69766e;
+            --line: #e1e6de;
+            --soft: #edf1e8;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            padding: 20px;
-            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 650px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-        }
-
-        h1 {
-            color: #2563eb;
-        }
-
-        .email {
-            background: #f8fafc;
-            border: 1px solid #cbd5e1;
-            padding: 15px;
-            text-align: left;
-            border-radius: 8px;
-            margin: 20px 0;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
         button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 6px;
-            background: #2563eb;
-            color: white;
+            font: inherit;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
-            background: #1d4ed8;
+        .wrapper {
+            width: min(1080px, calc(100% - 40px));
+            margin: auto;
         }
 
-        #feedback {
-            margin-top: 20px;
-            font-weight: bold;
+        /* HEADER */
+
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+            background: var(--white);
         }
 
-        .navigation {
+        .header-inner {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            margin-top: 30px;
+            align-items: center;
+            gap: 20px;
         }
 
-        .navigation a {
-            background: #16a34a;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            background: var(--green);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: var(--lime);
+        }
+
+        .brand-mark svg {
+            width: 27px;
+            height: 27px;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            line-height: 1.2;
+            font-weight: 900;
+            letter-spacing: 1.6px;
+        }
+
+        .brand-name span {
+            color: #819d40;
+        }
+
+        .brand-tagline {
+            display: block;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .header-link {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .header-link:hover {
+            color: #769438;
+        }
+
+        /* PAGE INTRODUCTION */
+
+        .page {
+            padding: 48px 0 65px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--green);
+        }
+
+        .module-label {
+            display: inline-block;
+            color: #607b32;
+            background: #edf2df;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 47px);
+            line-height: 1.13;
+            letter-spacing: -1.8px;
+            margin-bottom: 14px;
+        }
+
+        .page-description {
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        /* LEARNING OBJECTIVES */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-heading {
+            font-size: 19px;
+            letter-spacing: -0.5px;
+            margin-bottom: 17px;
+        }
+
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 13px;
+        }
+
+        .objective {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 17px;
+            font-size: 12px;
+            color: #536158;
+        }
+
+        .objective strong {
+            display: block;
+            color: var(--green);
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        /* SIMULATION */
+
+        .simulation {
+            margin-top: 39px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .simulation-header {
+            background: var(--green);
             color: white;
-            padding: 12px;
-            text-decoration: none;
-            border-radius: 6px;
-            flex: 1;
+            padding: 21px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
         }
 
-        .navigation a:first-child {
-            background: #2563eb;
+        .simulation-header h2 {
+            font-size: 15px;
+            letter-spacing: 0.2px;
+        }
+
+        .simulation-header span {
+            color: var(--lime);
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .simulation-body {
+            padding: 27px;
+        }
+
+        .scenario-label {
+            color: #718744;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin-bottom: 11px;
+        }
+
+        .scenario-title {
+            font-size: 21px;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .scenario-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 720px;
+        }
+
+        /* SAMPLE EMAIL */
+
+        .email-card {
+            background: #fafbf8;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            margin-top: 23px;
+            overflow: hidden;
+        }
+
+        .email-top {
+            background: #edf1e8;
+            padding: 13px 17px;
+            border-bottom: 1px solid var(--line);
+            font-size: 11px;
+            font-weight: 750;
+            color: var(--green);
+        }
+
+        .email-content {
+            padding: 19px;
+        }
+
+        .email-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 12px;
+            color: #59665d;
+        }
+
+        .email-row strong {
+            color: var(--green);
+            min-width: 55px;
+        }
+
+        .email-message {
+            margin-top: 17px;
+            border-top: 1px solid var(--line);
+            padding-top: 17px;
+            font-size: 13px;
+            line-height: 1.9;
+            color: #46534a;
+        }
+
+        .fake-link {
+            color: #b4473d;
+            text-decoration: underline;
+            font-weight: 750;
+            overflow-wrap: anywhere;
+        }
+
+        .email-warning {
+            margin-top: 16px;
+            background: #fcf0ee;
+            border: 1px solid #edcfca;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #8b4038;
+            line-height: 1.7;
+        }
+
+        /* QUESTIONS */
+
+        .question {
+            margin-top: 27px;
+            font-size: 15px;
+            font-weight: 750;
+        }
+
+        .options {
+            display: grid;
+            gap: 11px;
+            margin-top: 15px;
+        }
+
+        .option-button {
+            text-align: left;
+            width: 100%;
+            padding: 15px 17px;
+            background: #fafbf8;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 13px;
+            transition: border-color 0.2s,
+                background 0.2s, transform 0.2s;
+        }
+
+        .option-button:hover:not(:disabled) {
+            border-color: #92a95c;
+            background: #f3f6e9;
+            transform: translateY(-1px);
+        }
+
+        .option-button:disabled {
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        .option-button.correct {
+            border-color: #6e9e65;
+            background: #eef7e9;
+        }
+
+        .option-button.incorrect {
+            border-color: #d58b83;
+            background: #fcf0ee;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 19px;
+            padding: 17px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .feedback.success {
+            display: block;
+            background: #edf6e9;
+            border: 1px solid #c9dfbd;
+            color: #315c33;
+        }
+
+        .feedback.error {
+            display: block;
+            background: #fcf0ee;
+            border: 1px solid #edcfca;
+            color: #8b4038;
+        }
+
+        .simulation-actions {
+            display: flex;
+            gap: 11px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .primary-button {
+            border: none;
+            background: var(--green);
+            color: white;
+            padding: 12px 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .primary-button:hover {
+            background: var(--green-light);
+        }
+
+        .secondary-button {
+            border: 1px solid var(--line);
+            background: white;
+            color: var(--green);
+            padding: 12px 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .secondary-button:hover {
+            background: var(--soft);
+        }
+
+        /* TAKEAWAY */
+
+        .takeaway {
+            margin-top: 23px;
+            padding: 20px;
+            background: var(--soft);
+            border-left: 3px solid #8ea949;
+            border-radius: 5px;
+        }
+
+        .takeaway h3 {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .takeaway p {
+            color: #5e6a61;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* MODULE NAVIGATION */
+
+        .module-navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 39px;
+        }
+
+        .nav-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 14px 10px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            transition: background 0.2s;
+        }
+
+        .nav-button:hover {
+            background: var(--soft);
+        }
+
+        .nav-button.home {
+            background: var(--green);
+            color: white;
+            border-color: var(--green);
+        }
+
+        .nav-button.home:hover {
+            background: var(--green-light);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 23px 0;
+            background: white;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer strong {
+            color: var(--green);
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 650px) {
+            .wrapper {
+                width: calc(100% - 30px);
+            }
+
+            .page {
+                padding-top: 33px;
+            }
+
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+
+            .simulation-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .simulation-body {
+                padding: 20px;
+            }
+
+            .module-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .header-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<header class="header">
+    <div class="wrapper header-inner">
 
-    <h1>🎣 Phishing Awareness</h1>
+        <a href="../index.html" class="brand"
+           aria-label="CYBERSIM home">
 
-    <p>Learn how to recognize suspicious emails and online messages.</p>
+            <div class="brand-mark">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     aria-hidden="true">
+                    <path d="M12 3 20 6v5c0 5-3.3 8.2-8 10-4.7-1.8-8-5-8-10V6l8-3Z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+            </div>
 
-    <div class="email">
-        <h3>📧 Fake Bank Email</h3>
+            <div>
+                <div class="brand-name">
+                    CYBER<span>SIM</span>
+                </div>
+                <span class="brand-tagline">
+                    INTERACTIVE CYBERSECURITY LAB
+                </span>
+            </div>
 
-        <p><strong>From:</strong> security-alert@example.com</p>
+        </a>
 
-        <p><strong>Subject:</strong> URGENT! Your bank account will be blocked!</p>
+        <a class="header-link" href="../index.html">
+            ← All modules
+        </a>
 
-        <p>
-            Dear Customer, your account will be suspended today.
-            Click the link below immediately to verify your password.
-        </p>
+    </div>
+</header>
 
-        <p style="color: red;">
-            This is a simulated suspicious message. Do not click real suspicious links.
-        </p>
+
+<main class="wrapper page">
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>Module 02</span>
     </div>
 
-    <h3>What should you do?</h3>
+    <span class="module-label">
+        MODULE 02 / 08 · EMAIL SECURITY
+    </span>
 
-    <button onclick="checkAnswer(0)">
-        Click the link and enter my password
-    </button>
+    <h1 class="page-title">
+        Phishing Awareness
+    </h1>
 
-    <button onclick="checkAnswer(1)">
-        Ignore the link and contact my bank through its official website
-    </button>
+    <p class="page-description">
+        Learn how phishing works, recognise suspicious messages
+        and practise responding safely to emails designed to
+        steal personal or financial information.
+    </p>
 
-    <button onclick="checkAnswer(2)">
-        Reply with my personal information
-    </button>
 
-    <p id="feedback"></p>
+    <section class="section">
+        <h2 class="section-heading">
+            What you will learn
+        </h2>
 
-    <button onclick="resetSimulation()">Try Again</button>
+        <div class="objectives">
 
-    <div class="navigation">
-        <a href="../01-cybersecurity-basics/">
+            <div class="objective">
+                <strong>01 · Identify</strong>
+                Recognise suspicious emails and common phishing signs.
+            </div>
+
+            <div class="objective">
+                <strong>02 · Investigate</strong>
+                Understand urgency, misleading links and sender details.
+            </div>
+
+            <div class="objective">
+                <strong>03 · Respond</strong>
+                Learn how to verify messages through official channels.
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="simulation">
+
+        <div class="simulation-header">
+            <h2>Interactive Phishing Simulation</h2>
+            <span>SCENARIO 01 · BEGINNER</span>
+        </div>
+
+        <div class="simulation-body">
+
+            <div class="scenario-label">
+                EXAMINE THE EMAIL
+            </div>
+
+            <h2 class="scenario-title">
+                An urgent bank notification
+            </h2>
+
+            <p class="scenario-description">
+                Imagine that you receive the following email.
+                It claims to come from your bank and warns that
+                your account will be suspended unless you take
+                immediate action.
+            </p>
+
+            <div class="email-card">
+
+                <div class="email-top">
+                    SAMPLE EMAIL · SECURITY WARNING
+                </div>
+
+                <div class="email-content">
+
+                    <div class="email-row">
+                        <strong>From:</strong>
+                        <span>account-alert@example.invalid</span>
+                    </div>
+
+                    <div class="email-row">
+                        <strong>Subject:</strong>
+                        <span>URGENT: Your bank account will be suspended!</span>
+                    </div>
+
+                    <div class="email-message">
+
+                        Dear Customer,
+
+                        <br><br>
+
+                        We detected unusual activity on your bank
+                        account. Your account may be restricted if
+                        you do not verify your details immediately.
+
+                        <br><br>
+
+                        Click the link below to confirm your account:
+
+                        <br><br>
+
+                        <span class="fake-link">
+                            [Suspicious account verification link]
+                        </span>
+
+                        <br><br>
+
+                        Failure to respond may result in account suspension.
+
+                        <br><br>
+
+                        Regards,<br>
+                        Account Security Team
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="email-warning">
+                <strong>Security reminder:</strong>
+                This is a fictional training email. The displayed
+                link is not clickable. Never enter personal or
+                banking information into suspicious websites.
+            </div>
+
+            <p class="question">
+                What is the safest action to take?
+            </p>
+
+            <div class="options" id="options">
+
+                <button class="option-button" onclick="checkAnswer(0)">
+                    A. Click the link immediately to prevent your
+                    account from being suspended.
+                </button>
+
+                <button class="option-button" onclick="checkAnswer(1)">
+                    B. Ignore the warning signs and reply with
+                    your banking information.
+                </button>
+
+                <button class="option-button" onclick="checkAnswer(2)">
+                    C. Avoid the link and contact your bank through
+                    its official website or verified contact details.
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback"
+                 role="status" aria-live="polite">
+            </div>
+
+            <div class="simulation-actions">
+                <button class="secondary-button"
+                    onclick="resetSimulation()">
+                    ↻ Try Again
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+        <h3>Key takeaway</h3>
+        <p>
+            Phishing emails often use urgency, fear and misleading
+            links to trick people into sharing sensitive information.
+            Never trust an unexpected security warning just because
+            it looks official. Contact your bank using its official
+            website, app or verified phone number.
+        </p>
+    </section>
+
+
+    <nav class="module-navigation"
+         aria-label="Module navigation">
+
+        <a class="nav-button"
+           href="../01-cybersecurity-basics/">
             ← Previous Module
         </a>
 
-        <a href="../03-password-security/">
+        <a class="nav-button home"
+           href="../index.html">
+            🏠 Home
+        </a>
+
+        <a class="nav-button"
+           href="../03-password-security/">
             Next Module →
         </a>
-    </div>
 
-</div>
+    </nav>
+
+</main>
+
+
+<footer class="footer">
+    <div class="wrapper footer-inner">
+        <strong>CYBERSIM</strong>
+        <p>Interactive Cybersecurity Lab · Module 02 of 08</p>
+    </div>
+</footer>
+
 
 <script>
-    function checkAnswer(choice) {
-        const feedback = document.getElementById("feedback");
+    const feedback = document.getElementById("feedback");
+    const optionButtons = document.querySelectorAll(".option-button");
 
-        if (choice === 1) {
+    const correctAnswer = 2;
+
+    function checkAnswer(selectedOption) {
+
+        if (optionButtons[0].disabled) {
+            return;
+        }
+
+        optionButtons.forEach(button => {
+            button.disabled = true;
+        });
+
+        if (selectedOption === correctAnswer) {
+
+            optionButtons[selectedOption].classList.add("correct");
+
             feedback.textContent =
-                "Correct! You should never trust suspicious links. Contact your bank through its official website or phone number.";
+                "Correct! Phishing emails often use urgency and " +
+                "fear to pressure people into clicking malicious " +
+                "links. Contact your bank using its official " +
+                "website, app or verified contact details.";
 
-            feedback.style.color = "green";
+            feedback.className = "feedback success";
+
         } else {
-            feedback.textContent =
-                "Not quite! This message contains warning signs of phishing. Never share your password or personal information.";
 
-            feedback.style.color = "red";
+            optionButtons[selectedOption].classList.add("incorrect");
+            optionButtons[correctAnswer].classList.add("correct");
+
+            feedback.textContent =
+                "Not quite. Never use suspicious links or reply " +
+                "with personal information. Contact your bank " +
+                "through its official website, app or verified " +
+                "phone number instead.";
+
+            feedback.className = "feedback error";
         }
     }
 
     function resetSimulation() {
-        document.getElementById("feedback").textContent = "";
+
+        optionButtons.forEach(button => {
+            button.disabled = false;
+            button.classList.remove("correct", "incorrect");
+        });
+
+        feedback.textContent = "";
+        feedback.className = "feedback";
     }
 </script>
 
