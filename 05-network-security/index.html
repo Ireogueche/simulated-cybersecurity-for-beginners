@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Security Simulation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #174ea6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #feedback {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌐 Network Security</h1>
+
+    <p>Learn how to stay safe when using a Wi-Fi network.</p>
+
+    <h3>Scenario 1: Public Wi-Fi</h3>
+
+    <p>
+        You are at a café and want to connect to its public Wi-Fi.
+        You see two networks:
+    </p>
+
+    <p><strong>Network A:</strong> Cafe_Free_WiFi</p>
+    <p><strong>Network B:</strong> Cafe_Free_WiFi_Secure</p>
+
+    <p>
+        You are not sure which one belongs to the café.
+        What should you do?
+    </p>
+
+    <button onclick="checkAnswer(false)">
+        Connect to the first network immediately.
+    </button>
+
+    <button onclick="checkAnswer(true)">
+        Ask the café staff to confirm the correct network.
+    </button>
+
+    <button onclick="checkAnswer(false)">
+        Enter my banking details to test the connection.
+    </button>
+
+    <p id="feedback"></p>
+
+</div>
+
+<script>
+    function checkAnswer(correct) {
+        const feedback = document.getElementById("feedback");
+
+        if (correct) {
+            feedback.textContent =
+                "Correct! Always confirm public Wi-Fi details before connecting.";
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent =
+                "Not quite! Unknown Wi-Fi networks may be unsafe. Try again.";
+            feedback.style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>
