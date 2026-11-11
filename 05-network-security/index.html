@@ -10,15 +10,29 @@
         body {
             font-family: Arial, sans-serif;
             background: #f1f5f9;
-            padding: 25px;
+            padding: 20px;
+            text-align: center;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: auto;
             background: white;
             padding: 25px;
             border-radius: 12px;
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        .scenario {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 18px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
         }
 
         button {
@@ -26,16 +40,41 @@
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            background: #174ea6;
-            color: white;
             border: none;
             border-radius: 6px;
+            background: #2563eb;
+            color: white;
             cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
         }
 
         #feedback {
-            margin-top: 15px;
+            margin-top: 20px;
             font-weight: bold;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            background: #16a34a;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 6px;
+            flex: 1;
+        }
+
+        .navigation a:first-child {
+            background: #2563eb;
         }
     </style>
 </head>
@@ -46,52 +85,71 @@
 
     <h1>🌐 Network Security</h1>
 
-    <p>Learn how to stay safe when using a Wi-Fi network.</p>
+    <p>Learn how to protect yourself when connecting to networks.</p>
 
-    <h3>Scenario 1: Public Wi-Fi</h3>
+    <div class="scenario">
+        <h3>📶 Public Wi-Fi Scenario</h3>
 
-    <p>
-        You are at a café and want to connect to its public Wi-Fi.
-        You see two networks:
-    </p>
+        <p>
+            You are at a café and see two Wi-Fi networks.
+            One is confirmed by café staff as the official network.
+            The other has an unfamiliar name.
+        </p>
 
-    <p><strong>Network A:</strong> Cafe_Free_WiFi</p>
-    <p><strong>Network B:</strong> Cafe_Free_WiFi_Secure</p>
+        <p><strong>Which network should you choose?</strong></p>
+    </div>
 
-    <p>
-        You are not sure which one belongs to the café.
-        What should you do?
-    </p>
-
-    <button onclick="checkAnswer(false)">
-        Connect to the first network immediately.
+    <button onclick="checkAnswer(0)">
+        Connect to the unfamiliar network
     </button>
 
-    <button onclick="checkAnswer(true)">
-        Ask the café staff to confirm the correct network.
+    <button onclick="checkAnswer(1)">
+        Confirm the official network with café staff before connecting
     </button>
 
-    <button onclick="checkAnswer(false)">
-        Enter my banking details to test the connection.
+    <button onclick="checkAnswer(2)">
+        Connect to both networks
     </button>
 
     <p id="feedback"></p>
 
+    <button onclick="resetSimulation()">Try Again</button>
+
+    <div class="navigation">
+        <a href="../04-social-engineering/">
+            ← Previous Module
+        </a>
+
+        <a href="../index.html">
+            🏠 Home
+        </a>
+
+        <a href="../06-malware/">
+            Next Module →
+        </a>
+    </div>
+
 </div>
 
 <script>
-    function checkAnswer(correct) {
+    function checkAnswer(choice) {
         const feedback = document.getElementById("feedback");
 
-        if (correct) {
+        if (choice === 1) {
             feedback.textContent =
-                "Correct! Always confirm public Wi-Fi details before connecting.";
+                "Correct! Confirming the network name with staff helps you avoid fake Wi-Fi networks. Avoid sensitive activities on unsecured public Wi-Fi.";
+
             feedback.style.color = "green";
         } else {
             feedback.textContent =
-                "Not quite! Unknown Wi-Fi networks may be unsafe. Try again.";
+                "Not quite! An unfamiliar Wi-Fi network could be unsafe. Always verify the network before connecting.";
+
             feedback.style.color = "red";
         }
+    }
+
+    function resetSimulation() {
+        document.getElementById("feedback").textContent = "";
     }
 </script>
 
