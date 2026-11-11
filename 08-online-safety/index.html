@@ -15,7 +15,7 @@
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: auto;
             background: white;
             padding: 25px;
@@ -47,115 +47,192 @@
             margin-top: 20px;
             font-weight: bold;
         }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            background: #2563eb;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 6px;
+            flex: 1;
+        }
+
+        .navigation a:last-child {
+            background: #16a34a;
+        }
     </style>
 </head>
 
 <body>
 
 <div class="container">
+
     <h1>🛡️ Online Safety Challenge</h1>
 
     <p>Test your knowledge of staying safe online!</p>
 
-    <h3 id="question">You receive a message asking for your bank password. What should you do?</h3>
+    <h3 id="question"></h3>
 
-    <button onclick="checkAnswer(0)">Share the password</button>
-    <button onclick="checkAnswer(1)">Ignore the message and report it</button>
-    <button onclick="checkAnswer(2)">Reply with your personal details</button>
+    <div id="options"></div>
 
     <p id="feedback"></p>
 
-    <button onclick="nextQuestion()">Next Question</button>
+    <button id="nextButton" onclick="nextQuestion()">
+        Next Question
+    </button>
+
+    <div class="navigation">
+        <a href="../07-linux-basics/">← Previous Module</a>
+        <a href="../index.html">🏠 Home</a>
+    </div>
+
 </div>
 
 <script>
     const questions = [
         {
-            question: "You receive a message asking for your bank password. What should you do?",
+            question: "You receive an email asking you to click a suspicious link. What should you do?",
             options: [
-                "Share the password",
-                "Ignore the message and report it",
-                "Reply with your personal details"
+                "Click the link",
+                "Ignore it and report the email",
+                "Send your password"
             ],
             answer: 1,
-            explanation: "Correct! Never share your bank password. Report suspicious messages."
+            explanation: "Correct! Avoid suspicious links and report the message."
         },
         {
-            question: "You are using public Wi-Fi. Which action is safest?",
+            question: "What should you do before connecting to public Wi-Fi?",
             options: [
-                "Access your bank account on an unknown network",
-                "Share your passwords with others",
-                "Avoid sensitive activities on unsecured Wi-Fi"
+                "Connect to any available network",
+                "Share your password",
+                "Confirm the correct network with staff"
             ],
             answer: 2,
-            explanation: "Correct! Avoid accessing sensitive accounts on unsecured public Wi-Fi."
+            explanation: "Correct! Confirm the network name before connecting."
         },
         {
-            question: "A website asks for your personal information unexpectedly. What should you do?",
+            question: "How can you protect your online accounts?",
             options: [
-                "Check that the website is trustworthy before sharing anything",
-                "Enter all your details",
-                "Use someone else's password"
-            ],
-            answer: 0,
-            explanation: "Correct! Check that a website is legitimate before sharing personal information."
-        },
-        {
-            question: "What is a good way to protect your online accounts?",
-            options: [
+                "Use strong passwords and two-factor authentication",
                 "Use the same password everywhere",
-                "Use strong, unique passwords and enable two-factor authentication",
                 "Share passwords with friends"
             ],
+            answer: 0,
+            explanation: "Correct! Strong passwords and 2FA improve account security."
+        },
+        {
+            question: "What should you check before entering information on a website?",
+            options: [
+                "Whether it looks colorful",
+                "Whether the website address is legitimate",
+                "Whether it has many advertisements"
+            ],
             answer: 1,
-            explanation: "Correct! Strong, unique passwords and two-factor authentication improve account security."
+            explanation: "Correct! Check the website address carefully."
         }
     ];
 
     let currentQuestion = 0;
+    let score = 0;
+    let answered = false;
 
     function loadQuestion() {
+        answered = false;
+
+        const question = questions[currentQuestion];
+
         document.getElementById("question").textContent =
-            questions[currentQuestion].question;
-
-        const buttons = document.querySelectorAll(".container button");
-
-        questions[currentQuestion].options.forEach((option, index) => {
-            buttons[index].textContent = option;
-            buttons[index].onclick = () => checkAnswer(index);
-        });
+            question.question;
 
         document.getElementById("feedback").textContent = "";
+
+        const options = document.getElementById("options");
+        options.innerHTML = "";
+
+        question.options.forEach((option, index) => {
+            const button = document.createElement("button");
+
+            button.textContent = option;
+            button.onclick = () => checkAnswer(index);
+
+            options.appendChild(button);
+        });
+
+        document.getElementById("nextButton").style.display = "block";
+        document.getElementById("nextButton").textContent =
+            currentQuestion === questions.length - 1
+            ? "Finish Challenge"
+            : "Next Question";
     }
 
     function checkAnswer(choice) {
+        if (answered) return;
+
+        answered = true;
+
         const feedback = document.getElementById("feedback");
 
         if (choice === questions[currentQuestion].answer) {
-            feedback.textContent = questions[currentQuestion].explanation;
+            score++;
+            feedback.textContent =
+                questions[currentQuestion].explanation;
             feedback.style.color = "green";
         } else {
-            feedback.textContent = "Not quite! Try again.";
+            feedback.textContent =
+                "Not quite! " + questions[currentQuestion].explanation;
             feedback.style.color = "red";
         }
+
+        document.querySelectorAll("#options button").forEach(button => {
+            button.disabled = true;
+        });
     }
 
     function nextQuestion() {
+        if (!answered) {
+            document.getElementById("feedback").textContent =
+                "Please choose an answer first.";
+            document.getElementById("feedback").style.color = "red";
+            return;
+        }
+
         currentQuestion++;
 
         if (currentQuestion >= questions.length) {
             document.getElementById("question").textContent =
-                "🎉 Congratulations! You completed the Online Safety Challenge!";
+                "🎉 Congratulations! You completed all 8 modules!";
+
+            document.getElementById("options").innerHTML = "";
 
             document.getElementById("feedback").textContent =
-                "Keep practising safe online habits!";
+                "Your score: " + score + " out of " +
+                questions.length + ". Keep practising safe online habits!";
 
-            document.querySelectorAll(".container button").forEach(button => {
-                button.style.display = "none";
-            });
+            document.getElementById("feedback").style.color = "green";
+
+            document.getElementById("nextButton").textContent =
+                "Try Again";
+
+            document.getElementById("nextButton").onclick = restartQuiz;
 
             return;
         }
+
+        loadQuestion();
+    }
+
+    function restartQuiz() {
+        currentQuestion = 0;
+        score = 0;
+
+        document.getElementById("nextButton").onclick = nextQuestion;
 
         loadQuestion();
     }
