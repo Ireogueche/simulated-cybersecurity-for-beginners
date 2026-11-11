@@ -507,6 +507,250 @@
 
         /* RESPONSIVE DESIGN */
 
+
+        /* PHISHING INBOX INVESTIGATION LAB */
+
+        .phish-lab {
+            margin-top: 42px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .phish-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 22px 0 13px;
+            color: var(--green);
+            font-size: 11px;
+            font-weight: 750;
+        }
+
+        .phish-layout {
+            display: grid;
+            grid-template-columns: 255px minmax(0, 1fr);
+            gap: 14px;
+            margin-top: 15px;
+        }
+
+        .phish-inbox-list {
+            display: grid;
+            align-content: start;
+            gap: 9px;
+        }
+
+        .phish-inbox-item {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            background: #fafbf8;
+            text-align: left;
+            color: var(--ink);
+        }
+
+        .phish-inbox-item:hover,
+        .phish-inbox-item.active {
+            border-color: #92a95c;
+            background: #f1f5e7;
+        }
+
+        .phish-inbox-item strong {
+            display: block;
+            font-size: 12px;
+            color: var(--green);
+        }
+
+        .phish-inbox-item small {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 10px;
+            line-height: 1.5;
+        }
+
+        .phish-inbox-status {
+            display: block;
+            margin-top: 9px;
+            font-size: 9px;
+            font-weight: 800;
+            color: #74833d;
+            text-transform: uppercase;
+            letter-spacing: .6px;
+        }
+
+        .phish-inbox-status.reviewed-wrong {
+            color: #a34a40;
+        }
+
+        .phish-detail {
+            min-width: 0;
+            padding: 19px;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: white;
+        }
+
+        .phish-detail h3 {
+            font-size: 16px;
+            color: var(--green);
+            margin-bottom: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .phish-meta {
+            display: grid;
+            gap: 10px;
+            margin-bottom: 19px;
+        }
+
+        .phish-meta-row {
+            display: grid;
+            grid-template-columns: 82px minmax(0, 1fr);
+            gap: 9px;
+            font-size: 11px;
+            overflow-wrap: anywhere;
+        }
+
+        .phish-meta-row strong {
+            color: var(--green);
+        }
+
+        .phish-email-body {
+            border-top: 1px solid var(--line);
+            padding-top: 17px;
+            color: #526056;
+            font-size: 12px;
+            line-height: 1.9;
+            overflow-wrap: anywhere;
+        }
+
+        .phish-link-display {
+            display: block;
+            margin-top: 12px;
+            padding: 11px;
+            background: #fcf0ee;
+            border: 1px solid #edcfca;
+            border-radius: 6px;
+            color: #8b4038;
+            font-size: 11px;
+            overflow-wrap: anywhere;
+        }
+
+        .phish-link-display code {
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        .phish-clues {
+            margin-top: 15px;
+            padding: 14px;
+            background: var(--soft);
+            border-radius: 7px;
+        }
+
+        .phish-clues h4 {
+            color: var(--green);
+            font-size: 12px;
+            margin-bottom: 9px;
+        }
+
+        .phish-clues p {
+            font-size: 11px;
+            color: var(--muted);
+            margin-top: 7px;
+        }
+
+        .phish-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-top: 18px;
+        }
+
+        .phish-actions button:disabled {
+            opacity: .5;
+            cursor: not-allowed;
+        }
+
+        .phish-results {
+            margin-top: 20px;
+            padding: 22px;
+            background: var(--soft);
+            border: 1px solid var(--line);
+            border-radius: 9px;
+        }
+
+        .phish-results h3 {
+            font-size: 19px;
+            color: var(--green);
+        }
+
+        .phish-results p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 9px;
+        }
+
+        .phish-results strong {
+            color: var(--green);
+        }
+
+        .phish-safety-note {
+            margin-top: 18px;
+            padding: 13px;
+            background: #f3f5ed;
+            border-left: 3px solid #8ea949;
+            border-radius: 5px;
+            color: #59665d;
+            font-size: 11px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 700px) {
+            .phish-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
+        .phish-lab .simulation-header {
+            display: block;
+        }
+
+        .phish-lab .simulation-header p {
+            color: #c4d0c8;
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .phish-lab .scenario-box {
+            background: #fafbf8;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 19px;
+            margin: 17px 0;
+        }
+
+        .phish-lab .scenario-box h3 {
+            font-size: 16px;
+            color: var(--green);
+            margin-bottom: 9px;
+        }
+
+        .phish-lab .scenario-box p {
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .phish-results[hidden] {
+            display: none;
+        }
+
         @media (max-width: 650px) {
             .wrapper {
                 width: calc(100% - 30px);
@@ -765,6 +1009,107 @@
     </section>
 
 
+
+    <section class="phish-lab" id="phishing-inbox-lab">
+
+        <div class="simulation-header">
+            <h2>Practical Lab 02 — Phishing Inbox Investigation</h2>
+            <p>JUNIOR SOC ANALYST TRAINING · INTERACTIVE SIMULATION</p>
+        </div>
+
+        <div class="simulation-body">
+
+            <div class="scenario-label">YOUR ROLE: EMAIL SECURITY ANALYST</div>
+
+            <div class="scenario-box">
+                <h3>Mission: Investigate four incoming emails</h3>
+                <p>
+                    Review a fictional organisation's inbox. Examine each sender,
+                    reply-to address, message, displayed link, attachment and
+                    simulated authentication result. Classify each message as
+                    phishing or legitimate, then review the investigation feedback.
+                </p>
+                <p style="margin-top:10px">
+                    Select an email from the inbox. Use the inspection control
+                    to reveal its technical evidence before making your decision.
+                    You can revisit reviewed messages, but each message is scored
+                    only once.
+                </p>
+            </div>
+
+            <div class="phish-toolbar">
+                <span id="phishProgress">Message 1 of 4</span>
+                <span id="phishScore">Reviewed: 0/4 · Correct: 0</span>
+            </div>
+
+            <div class="phish-layout">
+                <div class="phish-inbox-list"
+                     id="phishInboxList"
+                     aria-label="Simulated email inbox">
+                </div>
+
+                <article class="phish-detail"
+                         id="phishMessagePanel"
+                         aria-live="polite">
+                </article>
+            </div>
+
+            <div class="feedback"
+                 id="phishFeedback"
+                 role="status"
+                 aria-live="polite">
+            </div>
+
+            <div class="phish-actions">
+                <button class="primary-button"
+                        id="phishClassifyButton"
+                        type="button">
+                    Classify as phishing
+                </button>
+
+                <button class="secondary-button"
+                        id="phishLegitimateButton"
+                        type="button">
+                    Classify as legitimate
+                </button>
+
+                <button class="primary-button"
+                        id="phishNextButton"
+                        type="button"
+                        disabled>
+                    Next unreviewed email →
+                </button>
+
+                <button class="secondary-button"
+                        id="phishRestartButton"
+                        type="button">
+                    ↻ Restart simulation
+                </button>
+            </div>
+
+            <div class="phish-results" id="phishResults" hidden>
+                <h3>Investigation completed</h3>
+                <p id="phishFinalScore"></p>
+                <p id="phishFinalMessage"></p>
+                <p><strong>Analyst reminder:</strong> A single email indicator is
+                    not always conclusive. Assess the sender, context, links,
+                    attachments and authentication evidence together.</p>
+            </div>
+
+            <div class="phish-safety-note">
+                <strong>Safe training environment:</strong> All messages,
+                domains, headers and attachments in this exercise are fictional.
+                Domains use the reserved <code>.example</code> namespace.
+                Links are displayed as text only; they are not clickable.
+                No email is sent, no attachment is downloaded and no credentials
+                are requested or collected. SPF, DKIM and DMARC results are
+                simulated evidence, not live email authentication checks.
+            </div>
+
+        </div>
+    </section>
+
+
     <section class="takeaway">
         <h3>Key takeaway</h3>
         <p>
@@ -861,6 +1206,343 @@
         feedback.textContent = "";
         feedback.className = "feedback";
     }
+
+    // CYBERSIM: local phishing inbox investigation.
+    // All sample evidence is fictional and stays in this page.
+
+    const phishingCases = [
+        {
+            sender: "Account Security Team",
+            email: "alerts@training-bank-support.example",
+            replyTo: "helpdesk@training-bank-support.example",
+            subject: "URGENT: Verify your account within 30 minutes",
+            date: "Today, 09:14 (simulated)",
+            body: "Dear Customer,\n\nWe detected unusual activity on your account. Your access may be suspended unless you verify your details immediately.\n\nUse the link below to review your account.\n\nRegards,\nAccount Security Team",
+            linkText: "Review account activity",
+            linkTarget: "https://training-bank-verify.example/login",
+            attachment: "None",
+            authentication: "SPF: FAIL · DKIM: FAIL · DMARC: FAIL (simulated)",
+            clues: [
+                "The fictional approved bank domain is training-bank.example. The sender uses a different domain.",
+                "The displayed link points to training-bank-verify.example, which does not match the approved domain.",
+                "The message creates artificial urgency by threatening account suspension.",
+                "All three simulated email authentication checks fail."
+            ],
+            isPhishing: true,
+            explanation: "This is phishing. The sender and link use unapproved domains, the authentication checks fail, and the message uses urgency to pressure the recipient."
+        },
+        {
+            sender: "Greenfield IT Service Desk",
+            email: "it-notices@greenfield.example",
+            replyTo: "it-notices@greenfield.example",
+            subject: "Scheduled learning portal maintenance",
+            date: "Today, 10:30 (simulated)",
+            body: "Hello Team,\n\nThe learning portal will undergo scheduled maintenance on Saturday between 10:00 and 11:00.\n\nNo action is required. Staff can contact the IT Service Desk through the usual internal support channel if they have questions.\n\nThank you,\nIT Service Desk",
+            linkText: "No web link supplied",
+            linkTarget: "None",
+            attachment: "None",
+            authentication: "SPF: PASS · DKIM: PASS · DMARC: PASS (simulated)",
+            clues: [
+                "The sender matches the fictional organisation's approved internal directory.",
+                "The reply-to address matches the sender address.",
+                "The simulated authentication checks pass.",
+                "The notice does not request credentials, payment or urgent action."
+            ],
+            isPhishing: false,
+            explanation: "This is the legitimate training message. Its sender is listed in the fictional approved directory, its reply-to address matches, and it does not request sensitive information. In a real investigation, verify through trusted internal channels rather than relying on appearance alone."
+        },
+        {
+            sender: "Maya - Finance Department",
+            email: "maya@greenfield-payrnents.example",
+            replyTo: "payroll@external-mail.example",
+            subject: "Updated payroll document — action required today",
+            date: "Today, 11:05 (simulated)",
+            body: "Hello,\n\nPlease review the updated payroll document before today's closing deadline.\n\nOpen the attached file and sign in again to confirm the adjustments.\n\nRegards,\nFinance Department",
+            linkText: "No web link supplied",
+            linkTarget: "None",
+            attachment: "Payroll_Adjustment.html (simulated; not downloadable)",
+            authentication: "SPF: PASS · DKIM: PASS for the sending domain (simulated)",
+            clues: [
+                "The fictional approved finance domain is greenfield-payments.example. The sender uses greenfield-payrnents.example, with the letters rn in place of m.",
+                "The reply-to address uses an unrelated external domain.",
+                "The unexpected HTML attachment requests a sign-in.",
+                "SPF and DKIM passing for the sender's own domain does not prove that the sender is an approved employee."
+            ],
+            isPhishing: true,
+            explanation: "This is a spear-phishing attempt. The attacker impersonates a finance employee using a lookalike domain and requests that the recipient open an unexpected HTML attachment and sign in. Authentication passing for an attacker's own domain does not make the message trustworthy."
+        },
+        {
+            sender: "Greenfield Learning Coordinator",
+            email: "learning@greenfield.example",
+            replyTo: "learning@greenfield.example",
+            subject: "Your cybersecurity workshop registration",
+            date: "Today, 12:20 (simulated)",
+            body: "Hello,\n\nThis is a confirmation of your registration for the cybersecurity workshop scheduled for Friday at 14:00.\n\nNo payment or password is required to keep your place. If you have questions, contact the learning team using the address in the organisation directory.\n\nRegards,\nLearning Coordinator",
+            linkText: "No web link supplied",
+            linkTarget: "None",
+            attachment: "None",
+            authentication: "SPF: PASS · DKIM: PASS · DMARC: PASS (simulated)",
+            clues: [
+                "The sender and reply-to addresses match the fictional approved organisation domain.",
+                "The message relates to an action the recipient already took: workshop registration.",
+                "It does not demand credentials, payment or urgent action.",
+                "The simulated authentication checks pass. These are supporting clues, not proof by themselves."
+            ],
+            isPhishing: false,
+            explanation: "This is the legitimate training message. It matches an expected registration, uses the fictional approved sender domain and does not request sensitive information. In real situations, confirm unexpected details through a trusted directory or known contact."
+        }
+    ];
+
+    let phishingCurrent = 0;
+    let phishingOutcomes = new Array(phishingCases.length).fill(null);
+
+    const phishingInbox = document.getElementById("phishInboxList");
+    const phishingPanel = document.getElementById("phishMessagePanel");
+    const phishingFeedback = document.getElementById("phishFeedback");
+    const phishingNext = document.getElementById("phishNextButton");
+    const phishingResults = document.getElementById("phishResults");
+
+    function escapePhishText(value) {
+        return String(value).replace(/[&<>"']/g, function(character) {
+            return {
+                "&": "&amp;",
+                "<": "&lt;",
+                ">": "&gt;",
+                '"': "&quot;",
+                "'": "&#39;"
+            }[character];
+        });
+    }
+
+    function updatePhishingStats() {
+        const reviewed = phishingOutcomes.filter(
+            result => result !== null
+        ).length;
+
+        const correct = phishingOutcomes.filter(
+            (result, index) =>
+                result !== null &&
+                result === phishingCases[index].isPhishing
+        ).length;
+
+        document.getElementById("phishProgress").textContent =
+            "Selected message " + (phishingCurrent + 1) +
+            " of " + phishingCases.length;
+
+        document.getElementById("phishScore").textContent =
+            "Reviewed: " + reviewed +
+            "/" + phishingCases.length +
+            " · Correct: " + correct;
+    }
+
+    function renderPhishingInbox() {
+        phishingInbox.innerHTML = phishingCases.map((item, index) => {
+            const outcome = phishingOutcomes[index];
+            let status = "Not reviewed";
+            let statusClass = "";
+
+            if (outcome !== null) {
+                const correct = outcome === item.isPhishing;
+                status = correct ? "Correct classification" : "Review classification";
+                statusClass = correct ? "" : "reviewed-wrong";
+            }
+
+            return `
+                <button type="button"
+                    class="phish-inbox-item ${index === phishingCurrent ? "active" : ""}"
+                    data-email-index="${index}"
+                    aria-pressed="${index === phishingCurrent}">
+                    <strong>${escapePhishText(item.sender)}</strong>
+                    <small>${escapePhishText(item.subject)}</small>
+                    <span class="phish-inbox-status ${statusClass}">
+                        ${status}
+                    </span>
+                </button>
+            `;
+        }).join("");
+
+        phishingInbox.querySelectorAll("[data-email-index]").forEach(button => {
+            button.addEventListener("click", function() {
+                phishingCurrent = Number(this.dataset.emailIndex);
+                renderPhishingInbox();
+                renderPhishingMessage();
+            });
+        });
+    }
+
+    function renderPhishingMessage() {
+        const item = phishingCases[phishingCurrent];
+        const reviewed = phishingOutcomes[phishingCurrent] !== null;
+        const safeBody = escapePhishText(item.body).replace(/\n/g, "<br>");
+
+        phishingPanel.innerHTML = `
+            <div class="scenario-label">
+                SIMULATED EMAIL ${String(phishingCurrent + 1).padStart(2, "0")}
+            </div>
+
+            <h3>${escapePhishText(item.subject)}</h3>
+
+            <div class="phish-meta">
+                <div class="phish-meta-row">
+                    <strong>From</strong>
+                    <span>${escapePhishText(item.sender)} &lt;${escapePhishText(item.email)}&gt;</span>
+                </div>
+                <div class="phish-meta-row">
+                    <strong>Reply-To</strong>
+                    <span>${escapePhishText(item.replyTo)}</span>
+                </div>
+                <div class="phish-meta-row">
+                    <strong>Date</strong>
+                    <span>${escapePhishText(item.date)}</span>
+                </div>
+                <div class="phish-meta-row">
+                    <strong>Attachment</strong>
+                    <span>${escapePhishText(item.attachment)}</span>
+                </div>
+            </div>
+
+            <div class="phish-email-body">
+                ${safeBody}
+                <div class="phish-link-display">
+                    <strong>Displayed link:</strong><br>
+                    ${escapePhishText(item.linkText)}<br><br>
+                    <strong>Destination:</strong><br>
+                    <code>${escapePhishText(item.linkTarget)}</code>
+                </div>
+            </div>
+
+            <div style="margin-top:17px">
+                <button type="button"
+                    class="secondary-button"
+                    id="phishInspectButton">
+                    Inspect email headers and technical clues
+                </button>
+            </div>
+
+            <div class="phish-clues" id="phishClues" hidden>
+                <h4>Technical investigation details</h4>
+                <p><strong>Simulated authentication:</strong><br>
+                    ${escapePhishText(item.authentication)}
+                </p>
+                ${item.clues.map(clue =>
+                    `<p>• ${escapePhishText(clue)}</p>`
+                ).join("")}
+            </div>
+        `;
+
+        const inspectButton = document.getElementById("phishInspectButton");
+        inspectButton.addEventListener("click", function() {
+            const clues = document.getElementById("phishClues");
+            clues.hidden = !clues.hidden;
+            this.textContent = clues.hidden
+                ? "Inspect email headers and technical clues"
+                : "Hide technical investigation details";
+        });
+
+        if (reviewed) {
+            const correct =
+                phishingOutcomes[phishingCurrent] === item.isPhishing;
+
+            phishingFeedback.textContent =
+                (correct ? "Correct classification. " : "Incorrect classification. ") +
+                item.explanation;
+
+            phishingFeedback.className =
+                correct ? "feedback success" : "feedback error";
+        } else {
+            phishingFeedback.textContent = "";
+            phishingFeedback.className = "feedback";
+        }
+
+        document.getElementById("phishClassifyButton").disabled = reviewed;
+        document.getElementById("phishLegitimateButton").disabled = reviewed;
+        phishingNext.disabled = !reviewed;
+
+        updatePhishingStats();
+    }
+
+    function classifyPhishing(classifiedAsPhishing) {
+        if (phishingOutcomes[phishingCurrent] !== null) return;
+
+        phishingOutcomes[phishingCurrent] = classifiedAsPhishing;
+
+        renderPhishingInbox();
+        renderPhishingMessage();
+
+        if (phishingOutcomes.every(result => result !== null)) {
+            showPhishingResults();
+        }
+    }
+
+    function nextPhishingMessage() {
+        if (phishingOutcomes[phishingCurrent] === null) return;
+
+        let nextIndex = phishingOutcomes.findIndex(
+            (result, index) => index > phishingCurrent && result === null
+        );
+
+        if (nextIndex === -1) {
+            nextIndex = phishingOutcomes.findIndex(result => result === null);
+        }
+
+        if (nextIndex === -1) {
+            showPhishingResults();
+            return;
+        }
+
+        phishingCurrent = nextIndex;
+        renderPhishingInbox();
+        renderPhishingMessage();
+    }
+
+    function showPhishingResults() {
+        const correct = phishingOutcomes.filter(
+            (result, index) =>
+                result === phishingCases[index].isPhishing
+        ).length;
+
+        document.getElementById("phishFinalScore").textContent =
+            "You correctly classified " + correct +
+            " out of " + phishingCases.length + " emails.";
+
+        let message;
+
+        if (correct === phishingCases.length) {
+            message = "Excellent investigation. You identified every message correctly.";
+        } else if (correct >= 3) {
+            message = "Good work. Review the missed indicators and strengthen your email investigation skills.";
+        } else {
+            message = "Keep practising. Review sender domains, reply-to addresses, links, attachments and authentication results.";
+        }
+
+        document.getElementById("phishFinalMessage").textContent = message;
+        phishingResults.hidden = false;
+    }
+
+    function restartPhishingInbox() {
+        phishingCurrent = 0;
+        phishingOutcomes = new Array(phishingCases.length).fill(null);
+        phishingResults.hidden = true;
+
+        renderPhishingInbox();
+        renderPhishingMessage();
+    }
+
+    document.getElementById("phishClassifyButton")
+        .addEventListener("click", () => classifyPhishing(true));
+
+    document.getElementById("phishLegitimateButton")
+        .addEventListener("click", () => classifyPhishing(false));
+
+    document.getElementById("phishNextButton")
+        .addEventListener("click", nextPhishingMessage);
+
+    document.getElementById("phishRestartButton")
+        .addEventListener("click", restartPhishingInbox);
+
+    renderPhishingInbox();
+    renderPhishingMessage();
+
 </script>
 
 </body>
