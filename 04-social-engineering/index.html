@@ -4,152 +4,843 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Social Engineering Simulation</title>
+
+    <meta name="description" content="Learn to recognise social engineering attacks and practise responding safely to suspicious requests.">
+
+    <title>CYBERSIM | Module 04 – Social Engineering</title>
 
     <style>
+        :root {
+            --green: #193329;
+            --green-light: #294337;
+            --lime: #d2e878;
+            --paper: #f5f6f1;
+            --white: #ffffff;
+            --ink: #192720;
+            --muted: #69766e;
+            --line: #e1e6de;
+            --soft: #edf1e8;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            padding: 20px;
-            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 650px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-        }
-
-        h1 {
-            color: #2563eb;
-        }
-
-        .scenario {
-            background: #f8fafc;
-            border: 1px solid #cbd5e1;
-            padding: 18px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: left;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
         button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 6px;
-            background: #2563eb;
-            color: white;
+            font: inherit;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
-            background: #1d4ed8;
+        .wrapper {
+            width: min(1080px, calc(100% - 40px));
+            margin: auto;
         }
 
-        #feedback {
-            margin-top: 20px;
-            font-weight: bold;
+        /* HEADER */
+
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+            background: var(--white);
         }
 
-        .navigation {
+        .header-inner {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            margin-top: 30px;
+            align-items: center;
+            gap: 20px;
         }
 
-        .navigation a {
-            background: #16a34a;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            background: var(--green);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: var(--lime);
+        }
+
+        .brand-mark svg {
+            width: 27px;
+            height: 27px;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            line-height: 1.2;
+            font-weight: 900;
+            letter-spacing: 1.6px;
+        }
+
+        .brand-name span {
+            color: #819d40;
+        }
+
+        .brand-tagline {
+            display: block;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .header-link {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .header-link:hover {
+            color: #769438;
+        }
+
+        /* PAGE INTRODUCTION */
+
+        .page {
+            padding: 48px 0 65px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--green);
+        }
+
+        .module-label {
+            display: inline-block;
+            color: #607b32;
+            background: #edf2df;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 47px);
+            line-height: 1.13;
+            letter-spacing: -1.8px;
+            margin-bottom: 14px;
+        }
+
+        .page-description {
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        /* LEARNING OBJECTIVES */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-heading {
+            font-size: 19px;
+            letter-spacing: -0.5px;
+            margin-bottom: 17px;
+        }
+
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 13px;
+        }
+
+        .objective {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 17px;
+            font-size: 12px;
+            color: #536158;
+        }
+
+        .objective strong {
+            display: block;
+            color: var(--green);
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        /* SIMULATION */
+
+        .simulation {
+            margin-top: 39px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .simulation-header {
+            background: var(--green);
             color: white;
-            padding: 12px;
-            text-decoration: none;
-            border-radius: 6px;
-            flex: 1;
+            padding: 21px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
         }
 
-        .navigation a:first-child {
-            background: #2563eb;
+        .simulation-header h2 {
+            font-size: 15px;
+            letter-spacing: 0.2px;
+        }
+
+        .simulation-header span {
+            color: var(--lime);
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .simulation-body {
+            padding: 27px;
+        }
+
+        .scenario-label {
+            color: #718744;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin-bottom: 11px;
+        }
+
+        .scenario-title {
+            font-size: 21px;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .scenario-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 720px;
+        }
+
+        /* CALL SCENARIO */
+
+        .call-card {
+            background: #fafbf8;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            margin-top: 23px;
+            overflow: hidden;
+        }
+
+        .call-top {
+            background: #edf1e8;
+            padding: 13px 17px;
+            border-bottom: 1px solid var(--line);
+            font-size: 11px;
+            font-weight: 750;
+            color: var(--green);
+        }
+
+        .call-content {
+            padding: 20px;
+        }
+
+        .call-label {
+            color: #718744;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .call-message {
+            color: #46534a;
+            font-size: 13px;
+            line-height: 1.9;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 16px;
+        }
+
+        .caller {
+            color: var(--green);
+            font-weight: 800;
+        }
+
+        .caller-request {
+            color: #a34a40;
+            font-weight: 750;
+        }
+
+        .call-warning {
+            margin-top: 16px;
+            background: #fcf0ee;
+            border: 1px solid #edcfca;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: #8b4038;
+            line-height: 1.7;
+        }
+
+        /* QUESTIONS */
+
+        .question {
+            margin-top: 27px;
+            font-size: 15px;
+            font-weight: 750;
+        }
+
+        .options {
+            display: grid;
+            gap: 11px;
+            margin-top: 15px;
+        }
+
+        .option-button {
+            text-align: left;
+            width: 100%;
+            padding: 15px 17px;
+            background: #fafbf8;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            font-size: 13px;
+            transition: border-color 0.2s,
+                background 0.2s, transform 0.2s;
+        }
+
+        .option-button:hover:not(:disabled) {
+            border-color: #92a95c;
+            background: #f3f6e9;
+            transform: translateY(-1px);
+        }
+
+        .option-button:disabled {
+            cursor: default;
+            opacity: 0.85;
+        }
+
+        .option-button.correct {
+            border-color: #6e9e65;
+            background: #eef7e9;
+        }
+
+        .option-button.incorrect {
+            border-color: #d58b83;
+            background: #fcf0ee;
+        }
+
+        .feedback {
+            display: none;
+            margin-top: 19px;
+            padding: 17px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .feedback.success {
+            display: block;
+            background: #edf6e9;
+            border: 1px solid #c9dfbd;
+            color: #315c33;
+        }
+
+        .feedback.error {
+            display: block;
+            background: #fcf0ee;
+            border: 1px solid #edcfca;
+            color: #8b4038;
+        }
+
+        .simulation-actions {
+            display: flex;
+            gap: 11px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .secondary-button {
+            border: 1px solid var(--line);
+            background: white;
+            color: var(--green);
+            padding: 12px 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .secondary-button:hover {
+            background: var(--soft);
+        }
+
+        /* TAKEAWAY */
+
+        .takeaway {
+            margin-top: 23px;
+            padding: 20px;
+            background: var(--soft);
+            border-left: 3px solid #8ea949;
+            border-radius: 5px;
+        }
+
+        .takeaway h3 {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .takeaway p {
+            color: #5e6a61;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* MODULE NAVIGATION */
+
+        .module-navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 39px;
+        }
+
+        .nav-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 14px 10px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            transition: background 0.2s;
+        }
+
+        .nav-button:hover {
+            background: var(--soft);
+        }
+
+        .nav-button.home {
+            background: var(--green);
+            color: white;
+            border-color: var(--green);
+        }
+
+        .nav-button.home:hover {
+            background: var(--green-light);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 23px 0;
+            background: white;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer strong {
+            color: var(--green);
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 650px) {
+            .wrapper {
+                width: calc(100% - 30px);
+            }
+
+            .page {
+                padding-top: 33px;
+            }
+
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+
+            .simulation-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .simulation-body {
+                padding: 20px;
+            }
+
+            .module-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .header-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<header class="header">
+    <div class="wrapper header-inner">
 
-    <h1>🎭 Social Engineering</h1>
+        <a href="../index.html" class="brand"
+           aria-label="CYBERSIM home">
 
-    <p>Learn how to recognize tricks used to steal personal information.</p>
+            <div class="brand-mark">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     aria-hidden="true">
+                    <path d="M12 3 20 6v5c0 5-3.3 8.2-8 10-4.7-1.8-8-5-8-10V6l8-3Z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+            </div>
 
-    <div class="scenario">
-        <h3>📞 Phone Call Scenario</h3>
+            <div>
+                <div class="brand-name">
+                    CYBER<span>SIM</span>
+                </div>
+                <span class="brand-tagline">
+                    INTERACTIVE CYBERSECURITY LAB
+                </span>
+            </div>
 
-        <p>
-            Someone calls you claiming to be from your bank.
-            They say there is a problem with your account and ask
-            you to reveal your password to fix it.
-        </p>
+        </a>
 
-        <p><strong>What should you do?</strong></p>
+        <a class="header-link" href="../index.html">
+            ← All modules
+        </a>
+
+    </div>
+</header>
+
+
+<main class="wrapper page">
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>Module 04</span>
     </div>
 
-    <button onclick="checkAnswer(0)">
-        Give the caller my password
-    </button>
+    <span class="module-label">
+        MODULE 04 / 08 · HUMAN SECURITY
+    </span>
 
-    <button onclick="checkAnswer(1)">
-        End the call and contact my bank using its official number
-    </button>
+    <h1 class="page-title">
+        Social Engineering
+    </h1>
 
-    <button onclick="checkAnswer(2)">
-        Give the caller my account details
-    </button>
+    <p class="page-description">
+        Understand how attackers manipulate trust, urgency
+        and human behaviour to obtain sensitive information.
+        Learn how to recognise suspicious requests and respond safely.
+    </p>
 
-    <p id="feedback"></p>
 
-    <button onclick="resetSimulation()">Try Again</button>
+    <section class="section">
+        <h2 class="section-heading">
+            What you will learn
+        </h2>
 
-    <div class="navigation">
-        <a href="../03-password-security/">
+        <div class="objectives">
+
+            <div class="objective">
+                <strong>01 · Understand</strong>
+                Learn what social engineering means and how it works.
+            </div>
+
+            <div class="objective">
+                <strong>02 · Recognise</strong>
+                Identify manipulation, impersonation and pressure tactics.
+            </div>
+
+            <div class="objective">
+                <strong>03 · Respond</strong>
+                Practise protecting personal and account information.
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="simulation">
+
+        <div class="simulation-header">
+            <h2>Interactive Social Engineering Simulation</h2>
+            <span>SCENARIO 01 · BEGINNER</span>
+        </div>
+
+        <div class="simulation-body">
+
+            <div class="scenario-label">
+                REAL-WORLD SITUATION
+            </div>
+
+            <h2 class="scenario-title">
+                A suspicious bank phone call
+            </h2>
+
+            <p class="scenario-description">
+                Imagine that you receive an unexpected phone call.
+                The caller claims to work for your bank and says
+                there is a security problem with your account.
+                They attempt to pressure you into sharing confidential
+                information.
+            </p>
+
+            <div class="call-card">
+
+                <div class="call-top">
+                    SAMPLE PHONE CONVERSATION · TRAINING SCENARIO
+                </div>
+
+                <div class="call-content">
+
+                    <div class="call-label">
+                        INCOMING CALL
+                    </div>
+
+                    <div class="call-message">
+
+                        <span class="caller">Caller:</span>
+                        Good afternoon. I'm calling from your bank's
+                        security department.
+
+                        <br><br>
+
+                        <span class="caller">Caller:</span>
+                        We have detected unusual activity on your
+                        account. We need to verify your identity
+                        immediately.
+
+                        <br><br>
+
+                        <span class="caller">Caller:</span>
+                        To prevent your account from being blocked,
+                        please tell me your banking password.
+
+                        <br><br>
+
+                        <span class="caller-request">Suspicious request:</span>
+                        The caller is asking you to reveal your
+                        confidential banking password.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="call-warning">
+                <strong>Security reminder:</strong>
+                This is a fictional training conversation.
+                Legitimate bank staff should not ask you to disclose
+                your full password or other authentication secrets
+                over an unexpected phone call.
+            </div>
+
+            <p class="question">
+                What is the safest response?
+            </p>
+
+            <div class="options" id="options">
+
+                <button class="option-button"
+                    onclick="checkAnswer(0)">
+                    A. Give the caller your password so they can
+                    fix the account problem.
+                </button>
+
+                <button class="option-button"
+                    onclick="checkAnswer(1)">
+                    B. End the call and contact your bank using
+                    its official, independently verified number.
+                </button>
+
+                <button class="option-button"
+                    onclick="checkAnswer(2)">
+                    C. Stay on the call and ask the caller to
+                    repeat the request.
+                </button>
+
+            </div>
+
+            <div class="feedback" id="feedback"
+                 role="status" aria-live="polite">
+            </div>
+
+            <div class="simulation-actions">
+                <button class="secondary-button"
+                    onclick="resetSimulation()">
+                    ↻ Try Again
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+        <h3>Key takeaway</h3>
+        <p>
+            Social engineering relies on manipulating people
+            rather than directly attacking technology. Be cautious
+            when someone creates urgency, impersonates an authority
+            figure or asks for confidential information. End
+            suspicious calls and contact the organisation through
+            an official, independently verified channel.
+        </p>
+    </section>
+
+
+    <nav class="module-navigation"
+         aria-label="Module navigation">
+
+        <a class="nav-button"
+           href="../03-password-security/">
             ← Previous Module
         </a>
 
-        <a href="../index.html">
+        <a class="nav-button home"
+           href="../index.html">
             🏠 Home
         </a>
 
-        <a href="../05-network-security/">
+        <a class="nav-button"
+           href="../05-network-security/">
             Next Module →
         </a>
-    </div>
 
-</div>
+    </nav>
+
+</main>
+
+
+<footer class="footer">
+    <div class="wrapper footer-inner">
+        <strong>CYBERSIM</strong>
+        <p>Interactive Cybersecurity Lab · Module 04 of 08</p>
+    </div>
+</footer>
+
 
 <script>
-    function checkAnswer(choice) {
-        const feedback = document.getElementById("feedback");
+    const feedback = document.getElementById("feedback");
+    const optionButtons = document.querySelectorAll(".option-button");
 
-        if (choice === 1) {
+    const correctAnswer = 1;
+
+    function checkAnswer(selectedOption) {
+
+        if (optionButtons[0].disabled) {
+            return;
+        }
+
+        optionButtons.forEach(button => {
+            button.disabled = true;
+        });
+
+        if (selectedOption === correctAnswer) {
+
+            optionButtons[selectedOption].classList.add("correct");
+
             feedback.textContent =
-                "Correct! Never share your password. End suspicious calls and contact your bank through an official number.";
+                "Correct! End the suspicious call and contact " +
+                "your bank using its official, independently " +
+                "verified number. Never disclose your banking " +
+                "password or authentication secrets to an unexpected caller.";
 
-            feedback.style.color = "green";
+            feedback.className = "feedback success";
+
         } else {
-            feedback.textContent =
-                "Not quite! This could be a social engineering trick. Never share passwords or sensitive information with unexpected callers.";
 
-            feedback.style.color = "red";
+            optionButtons[selectedOption].classList.add("incorrect");
+            optionButtons[correctAnswer].classList.add("correct");
+
+            feedback.textContent =
+                "Not quite. A genuine security process should not " +
+                "require you to reveal your password. End the call " +
+                "and contact your bank using its official number.";
+
+            feedback.className = "feedback error";
         }
     }
 
     function resetSimulation() {
-        document.getElementById("feedback").textContent = "";
+
+        optionButtons.forEach(button => {
+            button.disabled = false;
+            button.classList.remove("correct", "incorrect");
+        });
+
+        feedback.textContent = "";
+        feedback.className = "feedback";
     }
 </script>
 
