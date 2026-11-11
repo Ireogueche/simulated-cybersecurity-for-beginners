@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Engineering Simulation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: #174ea6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #feedback {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🎭 Social Engineering</h1>
+
+    <p>Can you recognise when someone is trying to trick you?</p>
+
+    <h3>Scenario 1: The Urgent Call</h3>
+
+    <p>
+        Someone calls you and says:
+        "Hello! I work for your bank. Your account has a problem.
+        Tell me your password immediately so I can fix it."
+    </p>
+
+    <h3>What should you do?</h3>
+
+    <button onclick="checkAnswer(false)">
+        Give them my password.
+    </button>
+
+    <button onclick="checkAnswer(true)">
+        End the call and contact my bank using its official number.
+    </button>
+
+    <button onclick="checkAnswer(false)">
+        Ask them to send me a link.
+    </button>
+
+    <p id="feedback"></p>
+
+</div>
+
+<script>
+    function checkAnswer(correct) {
+        const feedback = document.getElementById("feedback");
+
+        if (correct) {
+            feedback.textContent =
+                "Correct! Never share your password. Contact your bank through an official channel.";
+            feedback.style.color = "green";
+        } else {
+            feedback.textContent =
+                "Not quite! A real bank should never ask you to reveal your password.";
+            feedback.style.color = "red";
+        }
+    }
+</script>
+
+</body>
+</html>
