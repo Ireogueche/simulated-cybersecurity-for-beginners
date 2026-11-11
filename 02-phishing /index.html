@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,15 +10,29 @@
         body {
             font-family: Arial, sans-serif;
             background: #f1f5f9;
-            padding: 25px;
+            padding: 20px;
+            text-align: center;
         }
 
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: auto;
             background: white;
             padding: 25px;
             border-radius: 12px;
+        }
+
+        h1 {
+            color: #2563eb;
+        }
+
+        .email {
+            background: #f8fafc;
+            border: 1px solid #cbd5e1;
+            padding: 15px;
+            text-align: left;
+            border-radius: 8px;
+            margin: 20px 0;
         }
 
         button {
@@ -27,69 +40,119 @@
             width: 100%;
             padding: 12px;
             margin: 10px 0;
-            background: #174ea6;
-            color: white;
             border: none;
             border-radius: 6px;
+            background: #2563eb;
+            color: white;
             cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1d4ed8;
         }
 
         #feedback {
+            margin-top: 20px;
             font-weight: bold;
-            margin-top: 15px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .navigation a {
+            background: #16a34a;
+            color: white;
+            padding: 12px;
+            text-decoration: none;
+            border-radius: 6px;
+            flex: 1;
+        }
+
+        .navigation a:first-child {
+            background: #2563eb;
         }
     </style>
 </head>
 
 <body>
+
 <div class="container">
 
     <h1>🎣 Phishing Awareness</h1>
 
-    <p>Can you spot a phishing message?</p>
+    <p>Learn how to recognize suspicious emails and online messages.</p>
 
-    <h3>Scenario 1: Read this email</h3>
+    <div class="email">
+        <h3>📧 Fake Bank Email</h3>
 
-    <p><strong>From:</strong> security@bank-example.com</p>
+        <p><strong>From:</strong> security-alert@example.com</p>
 
-    <p><strong>Subject:</strong> URGENT! Your account will be blocked!</p>
+        <p><strong>Subject:</strong> URGENT! Your bank account will be blocked!</p>
 
-    <p>
-        Dear Customer, your account will be closed today.
-        Click the link below immediately to confirm your password.
-    </p>
+        <p>
+            Dear Customer, your account will be suspended today.
+            Click the link below immediately to verify your password.
+        </p>
+
+        <p style="color: red;">
+            This is a simulated suspicious message. Do not click real suspicious links.
+        </p>
+    </div>
 
     <h3>What should you do?</h3>
 
-    <button onclick="checkAnswer(false)">
-        Click the link immediately
+    <button onclick="checkAnswer(0)">
+        Click the link and enter my password
     </button>
 
-    <button onclick="checkAnswer(true)">
-        Avoid the link and contact the bank through its official website
+    <button onclick="checkAnswer(1)">
+        Ignore the link and contact my bank through its official website
     </button>
 
-    <button onclick="checkAnswer(false)">
-        Reply with my password
+    <button onclick="checkAnswer(2)">
+        Reply with my personal information
     </button>
 
     <p id="feedback"></p>
 
+    <button onclick="resetSimulation()">Try Again</button>
+
+    <div class="navigation">
+        <a href="../01-cybersecurity-basics/">
+            ← Previous Module
+        </a>
+
+        <a href="../03-password-security/">
+            Next Module →
+        </a>
+    </div>
+
 </div>
 
 <script>
-    function checkAnswer(correct) {
+    function checkAnswer(choice) {
         const feedback = document.getElementById("feedback");
 
-        if (correct) {
+        if (choice === 1) {
             feedback.textContent =
-                "Correct! Urgent threats and requests for passwords are warning signs.";
+                "Correct! You should never trust suspicious links. Contact your bank through its official website or phone number.";
+
             feedback.style.color = "green";
         } else {
             feedback.textContent =
-                "Not quite! Never share your password or trust unexpected links.";
+                "Not quite! This message contains warning signs of phishing. Never share your password or personal information.";
+
             feedback.style.color = "red";
         }
+    }
+
+    function resetSimulation() {
+        document.getElementById("feedback").textContent = "";
     }
 </script>
 
