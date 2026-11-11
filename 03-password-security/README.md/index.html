@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Security Simulator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 550px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        input {
+            width: 95%;
+            padding: 12px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 12px;
+            background: #174ea6;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🔐 Password Security</h1>
+
+    <p>Enter a sample password to test its strength.</p>
+
+    <p><strong>Do not enter your real password.</strong></p>
+
+    <input type="text" id="password"
+        placeholder="Enter a sample password">
+
+    <button onclick="checkPassword()">Check Password</button>
+
+    <p id="result"></p>
+
+</div>
+
+<script>
+    function checkPassword() {
+        const password = document.getElementById("password").value;
+        const result = document.getElementById("result");
+
+        let score = 0;
+
+        if (password.length >= 8) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[a-z]/.test(password)) score++;
+        if (/[0-9]/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+
+        if (password.length === 0) {
+            result.textContent = "Please enter a sample password.";
+        } else if (score <= 2) {
+            result.textContent = "Weak password. Try making it stronger.";
+        } else if (score <= 4) {
+            result.textContent = "Moderate password. You can improve it.";
+        } else {
+            result.textContent = "Strong password! Good job.";
+        }
+    }
+</script>
+
+</body>
+</html>
