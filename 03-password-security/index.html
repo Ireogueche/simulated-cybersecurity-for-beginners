@@ -4,151 +4,933 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Security Simulation</title>
+
+    <meta name="description" content="Learn password security and test password strength through a safe interactive cybersecurity exercise.">
+
+    <title>CYBERSIM | Module 03 – Password Security</title>
 
     <style>
+        :root {
+            --green: #193329;
+            --green-light: #294337;
+            --lime: #d2e878;
+            --paper: #f5f6f1;
+            --white: #ffffff;
+            --ink: #192720;
+            --muted: #69766e;
+            --line: #e1e6de;
+            --soft: #edf1e8;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f1f5f9;
-            padding: 20px;
-            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
         }
 
-        .container {
-            max-width: 650px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-        }
-
-        h1 {
-            color: #2563eb;
-        }
-
-        input {
-            width: 90%;
-            padding: 12px;
-            margin: 15px 0;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
-            font-size: 16px;
+        a {
+            color: inherit;
+            text-decoration: none;
         }
 
         button {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border: none;
-            border-radius: 6px;
-            background: #2563eb;
-            color: white;
+            font: inherit;
             cursor: pointer;
-            font-size: 16px;
         }
 
-        button:hover {
-            background: #1d4ed8;
+        .wrapper {
+            width: min(1080px, calc(100% - 40px));
+            margin: auto;
         }
 
-        #feedback {
-            margin-top: 20px;
-            font-weight: bold;
+        /* HEADER */
+
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--line);
+            background: var(--white);
         }
 
-        .navigation {
+        .header-inner {
             display: flex;
             justify-content: space-between;
-            gap: 10px;
-            margin-top: 30px;
+            align-items: center;
+            gap: 20px;
         }
 
-        .navigation a {
-            background: #16a34a;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .brand-mark {
+            width: 42px;
+            height: 42px;
+            flex-shrink: 0;
+            background: var(--green);
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            color: var(--lime);
+        }
+
+        .brand-mark svg {
+            width: 27px;
+            height: 27px;
+        }
+
+        .brand-name {
+            font-size: 16px;
+            line-height: 1.2;
+            font-weight: 900;
+            letter-spacing: 1.6px;
+        }
+
+        .brand-name span {
+            color: #819d40;
+        }
+
+        .brand-tagline {
+            display: block;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 1.2px;
+            font-weight: 700;
+            margin-top: 4px;
+        }
+
+        .header-link {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .header-link:hover {
+            color: #769438;
+        }
+
+        /* PAGE INTRODUCTION */
+
+        .page {
+            padding: 48px 0 65px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--muted);
+            font-size: 11px;
+            margin-bottom: 30px;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--green);
+        }
+
+        .module-label {
+            display: inline-block;
+            color: #607b32;
+            background: #edf2df;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.3px;
+            margin-bottom: 15px;
+        }
+
+        .page-title {
+            font-size: clamp(32px, 5vw, 47px);
+            line-height: 1.13;
+            letter-spacing: -1.8px;
+            margin-bottom: 14px;
+        }
+
+        .page-description {
+            color: var(--muted);
+            font-size: 14px;
+            max-width: 650px;
+            line-height: 1.8;
+        }
+
+        /* LEARNING OBJECTIVES */
+
+        .section {
+            margin-top: 35px;
+        }
+
+        .section-heading {
+            font-size: 19px;
+            letter-spacing: -0.5px;
+            margin-bottom: 17px;
+        }
+
+        .objectives {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 13px;
+        }
+
+        .objective {
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 17px;
+            font-size: 12px;
+            color: #536158;
+        }
+
+        .objective strong {
+            display: block;
+            color: var(--green);
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+
+        /* SIMULATION */
+
+        .simulation {
+            margin-top: 39px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .simulation-header {
+            background: var(--green);
             color: white;
-            padding: 12px;
-            text-decoration: none;
-            border-radius: 6px;
-            flex: 1;
+            padding: 21px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
         }
 
-        .navigation a:first-child {
-            background: #2563eb;
+        .simulation-header h2 {
+            font-size: 15px;
+            letter-spacing: 0.2px;
+        }
+
+        .simulation-header span {
+            color: var(--lime);
+            font-size: 10px;
+            letter-spacing: 1px;
+            font-weight: 800;
+        }
+
+        .simulation-body {
+            padding: 27px;
+        }
+
+        .scenario-label {
+            color: #718744;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 800;
+            margin-bottom: 11px;
+        }
+
+        .scenario-title {
+            font-size: 21px;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .scenario-description {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.8;
+            max-width: 720px;
+        }
+
+        /* PASSWORD CHECKER */
+
+        .password-panel {
+            margin-top: 23px;
+            background: #fafbf8;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            padding: 21px;
+        }
+
+        .password-label {
+            display: block;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            margin-bottom: 10px;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--line);
+            background: white;
+            border-radius: 7px;
+            outline: none;
+            color: var(--ink);
+            font-size: 14px;
+            font-family: monospace;
+        }
+
+        .password-input:focus {
+            border-color: #819d40;
+            box-shadow: 0 0 0 3px rgba(129,157,64,0.12);
+        }
+
+        .privacy-note {
+            font-size: 11px;
+            color: #8b5448;
+            line-height: 1.7;
+            margin-top: 10px;
+        }
+
+        .strength-section {
+            margin-top: 24px;
+        }
+
+        .strength-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .strength-heading strong {
+            font-size: 12px;
+        }
+
+        .strength-heading span {
+            color: var(--muted);
+            font-size: 11px;
+            font-weight: 750;
+        }
+
+        .strength-track {
+            width: 100%;
+            height: 8px;
+            background: #e7ebe3;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            background: #829b46;
+            border-radius: 10px;
+            transition: width 0.25s ease;
+        }
+
+        .criteria-title {
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            margin: 24px 0 12px;
+        }
+
+        .criteria-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .criterion {
+            display: flex;
+            gap: 9px;
+            align-items: center;
+            background: white;
+            border: 1px solid var(--line);
+            padding: 11px;
+            border-radius: 6px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        .criterion span {
+            width: 19px;
+            height: 19px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #edf0e9;
+            color: #7b867d;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        .criterion.met {
+            border-color: #c9dfbd;
+            background: #f4f8ef;
+            color: #315c33;
+        }
+
+        .criterion.met span {
+            background: #dcebd1;
+            color: #315c33;
+        }
+
+        .password-actions {
+            display: flex;
+            gap: 11px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .primary-button {
+            border: none;
+            background: var(--green);
+            color: white;
+            padding: 12px 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .primary-button:hover {
+            background: var(--green-light);
+        }
+
+        .secondary-button {
+            border: 1px solid var(--line);
+            background: white;
+            color: var(--green);
+            padding: 12px 19px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 750;
+        }
+
+        .secondary-button:hover {
+            background: var(--soft);
+        }
+
+        .password-feedback {
+            display: none;
+            margin-top: 17px;
+            padding: 15px;
+            background: #edf6e9;
+            border: 1px solid #c9dfbd;
+            color: #315c33;
+            border-radius: 7px;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .password-feedback.visible {
+            display: block;
+        }
+
+        /* TAKEAWAY */
+
+        .takeaway {
+            margin-top: 23px;
+            padding: 20px;
+            background: var(--soft);
+            border-left: 3px solid #8ea949;
+            border-radius: 5px;
+        }
+
+        .takeaway h3 {
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .takeaway p {
+            color: #5e6a61;
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        /* MODULE NAVIGATION */
+
+        .module-navigation {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            margin-top: 39px;
+        }
+
+        .nav-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            background: white;
+            border: 1px solid var(--line);
+            border-radius: 7px;
+            padding: 14px 10px;
+            color: var(--green);
+            font-size: 12px;
+            font-weight: 750;
+            transition: background 0.2s;
+        }
+
+        .nav-button:hover {
+            background: var(--soft);
+        }
+
+        .nav-button.home {
+            background: var(--green);
+            color: white;
+            border-color: var(--green);
+        }
+
+        .nav-button.home:hover {
+            background: var(--green-light);
+        }
+
+        /* FOOTER */
+
+        .footer {
+            border-top: 1px solid var(--line);
+            padding: 23px 0;
+            background: white;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        .footer strong {
+            color: var(--green);
+            letter-spacing: 1px;
+        }
+
+        /* RESPONSIVE DESIGN */
+
+        @media (max-width: 650px) {
+            .wrapper {
+                width: calc(100% - 30px);
+            }
+
+            .page {
+                padding-top: 33px;
+            }
+
+            .objectives {
+                grid-template-columns: 1fr;
+            }
+
+            .simulation-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .simulation-body {
+                padding: 20px;
+            }
+
+            .criteria-list {
+                grid-template-columns: 1fr;
+            }
+
+            .module-navigation {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand-name {
+                font-size: 14px;
+            }
+
+            .header-link {
+                font-size: 11px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<header class="header">
+    <div class="wrapper header-inner">
 
-    <h1>🔐 Password Security</h1>
+        <a href="../index.html" class="brand"
+           aria-label="CYBERSIM home">
 
-    <p>Learn how to recognize strong passwords.</p>
+            <div class="brand-mark">
+                <svg viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor"
+                     stroke-width="1.8"
+                     stroke-linecap="round"
+                     stroke-linejoin="round"
+                     aria-hidden="true">
+                    <path d="M12 3 20 6v5c0 5-3.3 8.2-8 10-4.7-1.8-8-5-8-10V6l8-3Z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
+            </div>
 
-    <p>
-        Enter a SAMPLE password to test its strength.
-        Never enter your real password.
+            <div>
+                <div class="brand-name">
+                    CYBER<span>SIM</span>
+                </div>
+                <span class="brand-tagline">
+                    INTERACTIVE CYBERSECURITY LAB
+                </span>
+            </div>
+
+        </a>
+
+        <a class="header-link" href="../index.html">
+            ← All modules
+        </a>
+
+    </div>
+</header>
+
+
+<main class="wrapper page">
+
+    <div class="breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>/</span>
+        <span>Module 03</span>
+    </div>
+
+    <span class="module-label">
+        MODULE 03 / 08 · ACCOUNT SECURITY
+    </span>
+
+    <h1 class="page-title">
+        Password Security
+    </h1>
+
+    <p class="page-description">
+        Learn how strong passwords protect digital accounts,
+        understand the qualities of a secure password and
+        practise evaluating password strength.
     </p>
 
-    <input
-        type="text"
-        id="password"
-        placeholder="Enter a sample password"
-    >
 
-    <button onclick="checkPassword()">
-        Check Password Strength
-    </button>
+    <section class="section">
+        <h2 class="section-heading">
+            What you will learn
+        </h2>
 
-    <p id="feedback"></p>
+        <div class="objectives">
 
-    <div class="navigation">
-        <a href="../02-phishing/">
+            <div class="objective">
+                <strong>01 · Understand</strong>
+                Learn why password security matters.
+            </div>
+
+            <div class="objective">
+                <strong>02 · Evaluate</strong>
+                Identify the features of a stronger password.
+            </div>
+
+            <div class="objective">
+                <strong>03 · Protect</strong>
+                Discover safer account protection practices.
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="simulation">
+
+        <div class="simulation-header">
+            <h2>Interactive Password Strength Checker</h2>
+            <span>EXERCISE 01 · BEGINNER</span>
+        </div>
+
+        <div class="simulation-body">
+
+            <div class="scenario-label">
+                PRACTICAL EXERCISE
+            </div>
+
+            <h2 class="scenario-title">
+                How strong is your sample password?
+            </h2>
+
+            <p class="scenario-description">
+                A strong password makes it harder for someone to
+                gain unauthorised access to an account. Use the
+                checker below to understand five important password
+                strength criteria.
+            </p>
+
+            <div class="password-panel">
+
+                <label class="password-label" for="samplePassword">
+                    Enter a fictional practice password
+                </label>
+
+                <input
+                    type="password"
+                    id="samplePassword"
+                    class="password-input"
+                    placeholder="Type a sample password..."
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-describedby="privacyNote"
+                >
+
+                <p class="privacy-note" id="privacyNote">
+                    Security reminder: Never enter a real password
+                    or a password you use for an actual account.
+                    Use a made-up practice password only.
+                </p>
+
+                <div class="strength-section">
+
+                    <div class="strength-heading">
+                        <strong>Password strength</strong>
+                        <span id="strengthLabel" aria-live="polite">
+                            Not assessed
+                        </span>
+                    </div>
+
+                    <div
+                        class="strength-track"
+                        role="progressbar"
+                        aria-label="Password strength score"
+                        aria-valuemin="0"
+                        aria-valuemax="5"
+                        aria-valuenow="0"
+                        id="strengthTrack"
+                    >
+                        <div class="strength-fill"
+                             id="strengthFill"></div>
+                    </div>
+
+                    <p class="criteria-title">
+                        Password security checklist
+                    </p>
+
+                    <div class="criteria-list">
+
+                        <div class="criterion" id="lengthCheck">
+                            <span>✓</span>
+                            At least 8 characters
+                        </div>
+
+                        <div class="criterion" id="upperCheck">
+                            <span>✓</span>
+                            At least one uppercase letter
+                        </div>
+
+                        <div class="criterion" id="lowerCheck">
+                            <span>✓</span>
+                            At least one lowercase letter
+                        </div>
+
+                        <div class="criterion" id="numberCheck">
+                            <span>✓</span>
+                            At least one number
+                        </div>
+
+                        <div class="criterion" id="specialCheck">
+                            <span>✓</span>
+                            At least one special character
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="password-actions">
+
+                    <button class="primary-button"
+                            onclick="checkPassword()">
+                        Check Password Strength
+                    </button>
+
+                    <button class="secondary-button"
+                            onclick="resetChecker()">
+                        ↻ Reset
+                    </button>
+
+                </div>
+
+                <div class="password-feedback"
+                     id="passwordFeedback"
+                     role="status"
+                     aria-live="polite">
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="takeaway">
+        <h3>Key takeaway</h3>
+        <p>
+            Use long, unique passwords for different accounts.
+            A password manager can help you create and store
+            them securely. Enable multi-factor authentication
+            wherever possible. Meeting all five checklist
+            criteria is a useful starting point, not a guarantee
+            that a password is completely secure.
+        </p>
+    </section>
+
+
+    <nav class="module-navigation"
+         aria-label="Module navigation">
+
+        <a class="nav-button"
+           href="../02-phishing/">
             ← Previous Module
         </a>
 
-        <a href="../index.html">
+        <a class="nav-button home"
+           href="../index.html">
             🏠 Home
         </a>
 
-        <a href="../04-social-engineering/">
+        <a class="nav-button"
+           href="../04-social-engineering/">
             Next Module →
         </a>
-    </div>
 
-</div>
+    </nav>
+
+</main>
+
+
+<footer class="footer">
+    <div class="wrapper footer-inner">
+        <strong>CYBERSIM</strong>
+        <p>Interactive Cybersecurity Lab · Module 03 of 08</p>
+    </div>
+</footer>
+
 
 <script>
+    const passwordInput = document.getElementById("samplePassword");
+
+    const strengthLabel = document.getElementById("strengthLabel");
+    const strengthFill = document.getElementById("strengthFill");
+    const strengthTrack = document.getElementById("strengthTrack");
+    const passwordFeedback = document.getElementById("passwordFeedback");
+
+    const criteria = {
+        length: document.getElementById("lengthCheck"),
+        upper: document.getElementById("upperCheck"),
+        lower: document.getElementById("lowerCheck"),
+        number: document.getElementById("numberCheck"),
+        special: document.getElementById("specialCheck")
+    };
+
+    function updateCriterion(element, passed) {
+        element.classList.toggle("met", passed);
+    }
+
     function checkPassword() {
-        const password = document.getElementById("password").value;
-        const feedback = document.getElementById("feedback");
+
+        const password = passwordInput.value;
 
         if (password.length === 0) {
-            feedback.textContent = "Please enter a sample password.";
-            feedback.style.color = "red";
+            passwordFeedback.textContent =
+                "Please enter a fictional practice password first.";
+
+            passwordFeedback.className = "password-feedback visible";
             return;
         }
 
-        let score = 0;
+        const checks = {
+            length: password.length >= 8,
+            upper: /[A-Z]/.test(password),
+            lower: /[a-z]/.test(password),
+            number: /[0-9]/.test(password),
+            special: /[^A-Za-z0-9]/.test(password)
+        };
 
-        if (password.length >= 8) score++;
-        if (/[A-Z]/.test(password)) score++;
-        if (/[a-z]/.test(password)) score++;
-        if (/[0-9]/.test(password)) score++;
-        if (/[^A-Za-z0-9]/.test(password)) score++;
+        updateCriterion(criteria.length, checks.length);
+        updateCriterion(criteria.upper, checks.upper);
+        updateCriterion(criteria.lower, checks.lower);
+        updateCriterion(criteria.number, checks.number);
+        updateCriterion(criteria.special, checks.special);
 
-        if (score <= 2) {
-            feedback.textContent = "Weak password. Try adding more security features.";
-            feedback.style.color = "red";
-        } else if (score <= 4) {
-            feedback.textContent = "Good password! You can make it stronger.";
-            feedback.style.color = "orange";
+        const score = Object.values(checks).filter(Boolean).length;
+
+        const percentage = (score / 5) * 100;
+
+        strengthFill.style.width = percentage + "%";
+
+        strengthTrack.setAttribute("aria-valuenow", score);
+
+        const labels = [
+            "Very weak",
+            "Very weak",
+            "Needs improvement",
+            "Getting stronger",
+            "Good",
+            "Meets all five criteria"
+        ];
+
+        strengthLabel.textContent = labels[score];
+
+        if (score === 5) {
+            passwordFeedback.textContent =
+                "Excellent! Your practice password meets all five " +
+                "checks. Remember that this is only a basic strength " +
+                "assessment. Use a unique password for every account " +
+                "and enable multi-factor authentication.";
+
         } else {
-            feedback.textContent = "Strong sample password! Great job.";
-            feedback.style.color = "green";
+            passwordFeedback.textContent =
+                "Your practice password meets " + score +
+                " out of 5 criteria. Review the checklist above " +
+                "and try a longer, more varied sample password.";
         }
+
+        passwordFeedback.className = "password-feedback visible";
+    }
+
+    function resetChecker() {
+
+        passwordInput.value = "";
+
+        Object.values(criteria).forEach(element => {
+            element.classList.remove("met");
+        });
+
+        strengthFill.style.width = "0%";
+
+        strengthLabel.textContent = "Not assessed";
+
+        strengthTrack.setAttribute("aria-valuenow", "0");
+
+        passwordFeedback.textContent = "";
+
+        passwordFeedback.className = "password-feedback";
+
     }
 </script>
 
